@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.UserMapper">
+
+    <!--用户登入-->
+    <select id="login" parameterType="com.pojo.User" resultType="int">
+        SELECT count(1) FROM t_user WHERE `loginName`=#{loginName} AND `password`=#{password}
+    </select>
+
+    <!--查询指定信息-->
+    <select id="queryAppointInfo" parameterType="com.pojo.User" resultType="com.pojo.User">
+        SELECT * FROM t_user WHERE `loginName`=#{loginName} AND `password`=#{password}
+    </select>
+
+    <!--用户注册-->
+    <insert id="insertInfo" parameterType="com.pojo.User">
+        INSERT  INTO `t_user`(`nickname`,`password`,`sex`,`loginName`,`type`)
+        VALUES ('麦子',#{password},1,#{loginName},0)
+    </insert>
+
+    <!--查询是否有此账号-->
+    <select id="queryLoginName" resultType="int">
+          SELECT COUNT(1) FROM `t_user` WHERE loginName=#{loginName}
+    </select>
+
+    <!--修改用户信息-->
+    <update id="updateInfo" parameterType="com.pojo.User">
+        UPDATE t_user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="userName != null and userName !=''">`userName`=#{userName},</if>
+            <if test="nickname !=null and nickname !=''">`nickname`=#{nickname},</if>
+            <if test="password !=null and password !=''">`password`=#{password},</if>
+            <if test="sex !=null">`sex`=#{sex},</if>
+            <if test="identityCode !=null and identityCode !=''">`identityCode`=#{identityCode},</if>
+            <if test="date !=null">`date`=#{date},</if>
+            <if test="loginName !=null and loginName !=''">`loginName`=#{loginName},</if>
+            <if test="imageName !=null and imageName !=''">`imageName`=#{imageName},</if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+
+    <!--查询用户是否存在-->
+    <select id="queryExist" resultType="int">
+        SELECT COUNT(1) FROM t_user WHERE loginName=#{loginName}
+    </select>
+
+    <!--找回密码-->
+    <update id="updatePassword" parameterType="com.pojo.User">
+        UPDATE t_user SET `password`=#{password} WHERE loginName=#{loginName}
+    </update>
+
+    <!--根据用户ID查询用户常用购票人-->
+    <select id="queryTicketHolder" parameterType="int" resultType="com.pojo.TicketHolder">
+        SELECT * FROM t_ticketHolder WHERE t_user=#{t_user}
+    </select>
+
+    <!--添加常用购票人-->
+    <insert id="insertTicketHolder" parameterType="com.pojo.TicketHolder">
+        INSERT  INTO `t_ticketHolder`(`name`,`type`,`document`,`t_user`) VALUES (#{name},#{type},#{document},#{t_user})
+    </insert>
+
+    <!--删除常用购票人-->
+    <delete id="deleteTicketHolder" parameterType="int">
+        DELETE FROM t_ticketHolder WHERE id=#{id}
+    </delete>
+
+    <!--根据用户ID查询用户信息-->
+    <select id="queryUserInfo" parameterType="int" resultType="com.pojo.User">
+        SELECT * FROM t_user WHERE id=#{id}
+    </select>
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mapper.OrderMapper">
+
+    <resultMap id="OrderMap" type="com.pojo.Order">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="number" property="number" jdbcType="VARCHAR"/>
+        <result column="mode" property="mode" jdbcType="BIGINT"/>
+        <result column="num" property="num" jdbcType="BIGINT"/>
+        <result column="price" property="price" jdbcType="DOUBLE"/>
+        <result column="transport" property="transport" jdbcType="DOUBLE"/>
+        <result column="discount" property="discount" jdbcType="DOUBLE"/>
+        <result column="status" property="status" jdbcType="BIGINT"/>
+        <result column="createDate" property="createDate" jdbcType="DATE"/>
+        <result column="deliveryDate" property="deliveryDate" jdbcType="DATE"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <association property="user" column="user_id" javaType="com.pojo.User"
+                     select="com.mapper.UserMapper.queryUserInfo"/>
+        <association property="tshow" column="show_id" javaType="com.pojo.Tshow"
+                     select="com.mapper.TshowMapper.queryShowKey"/>
+        <association property="taddress" column="address_id" javaType="com.pojo.Taddress"
+                     select="com.mapper.TaddressMapper.queryAddressKey"/>
+    </resultMap>
+
+    <resultMap id="ReduceMap" type="com.pojo.Reduce">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="number" property="number" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="de" property="de" jdbcType="VARCHAR"/>
+        <result column="tot" property="tot" jdbcType="DOUBLE"/>
+        <result column="sub" property="sub" jdbcType="DOUBLE"/>
+        <result column="type" property="type" jdbcType="BIGINT"/>
+        <result column="createDate" property="createDate" jdbcType="DATE"/>
+        <result column="exitDate" property="exitDate" jdbcType="DATE"/>
+        <association property="user" column="user_id" javaType="com.pojo.User"
+                     select="com.mapper.UserMapper.queryUserInfo"/>
+    </resultMap>
+
+    <!--根据用户ID查询用户订单-->
+    <select id="queryOrderInfo" resultMap="OrderMap">
+      SELECT * FROM t_order WHERE user_id=#{user_id}
+    </select>
+
+    <!--根据用户ID查询用户优惠劵-->
+    <select id="queryReduceInfo" resultMap="ReduceMap">
+      SELECT * FROM t_reduce WHERE user_id=#{user_id}
+    </select>
+
+</mapper>

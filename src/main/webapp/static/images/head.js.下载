@@ -1,0 +1,15 @@
+function showInfo1() {
+    $(".list-wrap").slideDown(450);
+}
+
+function showInfo2() {
+    $(".list-wrap").slideUp(450);
+
+}
+
+/**
+ * 跳转到登入页面
+ */
+function loginAndJumping() {
+    window.location.href="/damai/jsp/login.jsp";
+}

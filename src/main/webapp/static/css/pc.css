@@ -1,0 +1,113 @@
+/*修改密码、验证邮箱、验证手机*/
+.ui-button-lorange, .ui-button-morange, .ui-button-sorange {
+    color: #fff;
+    border: 1px solid #ff1268 !important;
+    background-color: #ff1268 !important;
+}
+
+.ui-form-other {
+    color: #ff1268 !important;
+}
+
+.ui-form-other:hover {
+    color: #ff1268 !important;
+}
+
+.ui-form-other:visited {
+    color: #ff1268 !important;
+}
+
+body .ft-orange {
+    color: #ff1268 !important;
+}
+
+.ui-step .ui-step-active {
+    color: #ff1268 !important;
+}
+
+.ui-form-item-error .ui-textarea {
+    border: 1px #ff1268 solid !important;
+    color: red;
+}
+
+.ui-form-item-error .ui-input {
+    border: 1px #BABABA solid !important;
+    color: red;
+}
+
+.checkcode-warp .ft-orange {
+    color: #ff1268 !important;
+}
+
+.checkcode-warp .ui-button-over {
+    left: 120px;
+    background: #f3b2ca !important;
+    border: 1px solid #ff1268 !important;
+    height: 100%;
+    white-space: nowrap;
+    padding: 0 5px;
+    min-width: 248px;
+    color: #ff1268 !important;
+    border-radius: 3px;
+    top: 0px;
+}
+
+.ui-form-item-error .ui-form-explain .iconfont {
+    color: #ff1268 !important;
+}
+
+.ui-form-item-error .ui-form-explain {
+    color: #ff1268 !important;
+    display: none;
+}
+
+.ui-step .ui-step-done .ui-step-line {
+    background: #ff1268 !important;
+}
+
+.ui-step .ui-step-done span.ui-step-text {
+    color: #ff1268 !important;
+}
+
+.ui-step .ui-step-done .iconfont {
+    color: #ff1268 !important;
+}
+
+.ui-form-item-error .ui-form-explain, .ui-form-item-error .ui-form-explain .iconfont {
+    color: #ff1268 !important;
+
+}
+
+.bottom-tips .ui-list-nosquare .ui-list-item .ui-list-item-text {
+    color: #737373 !important;
+}
+
+.ui-step .ui-step-active .iconfont {
+    color: #ff1268 !important;
+}
+
+/*替换导航logo*/
+.alipassport #logo {
+    margin-right: 10px;
+    float: left;
+    display: inline-block;
+    width: 167px;
+    height: 60px;
+    background: url(//dui.dmcdn.cn/dm_2015/index/img/logo-334-120.png) no-repeat !important;
+    background-size: 167px 60px !important;
+    margin-top: -14px;
+    background-position: 0 0;
+}
+
+#logo a {
+    float: left;
+    display: inline-block;
+    height: 60px !important;
+    width: 167px !important;
+    overflow: auto !important;
+    text-indent: -999em;
+}
+
+input {
+    outline: none
+}

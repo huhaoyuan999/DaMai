@@ -1,0 +1,280 @@
+.ui-form-item .ui-form-select-country {
+    width: 88px;
+    height: 28px;
+    background-color: #fafafa;
+    border: none;
+    border: 1px solid #cccccc;
+    border-radius: 0px;
+    outline: none;
+}
+
+.ui-form-item .ui-form-country-code {
+    display: inline-block;
+    _display: inline;
+    width: 40px;
+    height: 28px;
+    line-height: 28px;
+    vertical-align: middle;
+    text-align: center;
+    background-color: #f2f2f2;
+    border: 1px solid #cccccc;
+}
+
+.ui-form-phone-buttons {
+    margin-top: 84px;
+}
+
+.ui-input-mobile {
+    width: 216px;
+    height: 26px;
+    padding: 0px;
+    padding-left: 10px;
+    border: 2px solid #69cee0;
+}
+
+.ui-label-country {
+    line-height: 28px;
+}
+
+.ui-chkcode-wrapper {
+    display: inline-block;
+    _display: inline;
+}
+
+.ui-tip-bubble,
+.ui-tip-triangle {
+    display: inline-block;
+    _display: inline;
+}
+
+.ui-tip-bubble {
+    position: relative;
+    margin-left: 10px;
+    line-height: 100%;
+    zoom: 1;
+}
+
+.ui-tip-bubble span {
+    line-height: 16px;
+}
+
+.ui-tip-text {
+    display: inline-block;
+    _display: inline;
+    height: 16px;
+    _height: 17px;
+    line-height: 16px;
+    _line-height: 17px;
+    padding: 0px 5px;
+    background-color: #fcf2c8;
+    border: 1px solid #dbd1a5;
+}
+
+.ui-tip-triangle {
+    position: absolute;
+    width: 6px;
+    height: 12px;
+    font-size: 12px;
+    top: 3px;
+    left: -6px;
+}
+
+.ui-tip-triangle em {
+    position: absolute;
+    top: 1px \0;
+}
+
+.ui-tip-triangle-inner {
+    position: absolute;
+    width: 6px;
+    height: 12px;
+    left: 3px;
+    color: #fcf2c8;
+    overflow: hidden;
+}
+
+.ui-tip-triangle-outer {
+    position: absolute;
+    width: 4px;
+    height: 12px;
+    left: 2px;
+    color: #dbd1a5;
+    overflow: hidden;
+}
+
+.ui-form-item-sms-up {
+    margin-top: 55px;
+    padding-left: 85px;
+}
+
+.sms-up-line-one .user-phone {
+    display: inline-block;
+    _display: inline;
+    font-size: 14px;
+}
+
+.sms-up-line-one .user-phone-switch {
+    margin-left: 10px;
+    font-size: 12px;
+}
+
+.sms-up-line-two {
+    margin-top: 30px;
+}
+
+.sms-up-line-two span {
+    font-size: 14px;
+}
+
+.sms-up-line-two .sms-content span {
+    font-size: 27px;
+    color: #ff6600;
+}
+
+.sms-up-line-two .sms-content span.sms-first {
+    color: #11c4ff;
+    margin-left: 10px;
+}
+
+.sms-up-line-two .sms-content span.sms-last {
+    margin-right: 10px;
+}
+
+.sms-up-line-two .up-phone {
+    margin-right: 10px;
+}
+
+.sms-up-line-two .up-phone span {
+    font-size: 27px;
+    margin-left: 10px;
+    color: #ff6600;
+}
+
+.sms-up-line-three {
+    margin-top: 35px;
+    margin-left: 165px;
+}
+
+.sms-up-line-three span {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.sms-up-line-three .waiting {
+    margin-bottom: -1px;
+    margin-right: 12px;
+}
+
+.sms-up-line-three {
+    margin-top: 35px;
+}
+
+.sms-up-line-three span {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.sms-up-line-three .waiting {
+    margin-bottom: -1px;
+    margin-right: 12px;
+}
+
+.sms-up-line-three-reload {
+    margin-left: 112px;
+}
+
+.sms-up-line-three-reload span {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.sms-up-line-three-reload .reload {
+    width: 93px;
+    height: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #c8c8c8;
+    border-radius: 3px;
+    display: inline-block;
+    _display: inline;
+    cursor: pointer;
+    zoom: 1;
+}
+
+.sms-up-line-three-reload .reload .waiting {
+    margin-left: 7px;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.sms-up-line-three-success {
+    margin-left: 220px;
+}
+
+.sms-up-line-three-success .success {
+    display: inline-block;
+    _display: inline;
+    width: 18px;
+    height: 18px;
+    margin-right: 12px;
+    vertical-align: middle;
+    zoom: 1;
+}
+
+.sms-up-line-three-success span {
+    line-height: 18px;
+    vertical-align: middle;
+}
+
+.sms-up-line-four {
+    margin-top: 35px;
+    width: 600px;
+    height: 36px;
+    line-height: 36px;
+    vertical-align: middle;
+    background-color: #f9f9f9;
+}
+
+.sms-up-line-four div {
+    float: left;
+    height: 36px;
+    margin-left: 12px;
+    line-height: 36px;
+    vertical-align: middle;
+}
+
+.sms-up-line-four span {
+    margin-left: 10px;
+    font-size: 12px;
+    line-height: 100%;
+}
+
+.sms-up-line-four a {
+    float: right;
+    height: 36px;
+    line-height: 36px;
+    margin-right: 33px;
+    font-size: 12px;
+    vertical-align: middle;
+}
+
+.sms-up-line-four img {
+    _margin-top: 12px;
+    _position: relative;
+    _top: 1px;
+    _left: 33px;
+}
+
+.sms-up-line-four .info {
+    display: inline-block;
+    _display: inline;
+    width: 12px;
+    height: 12px;
+    margin-left: 33px;
+    zoom: 1;
+}
+
+.hidden {
+    display: none;
+}

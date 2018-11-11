@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mapper.TareainfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.pojo.Tareainfo">
+        <id column="areainfo_id" property="areainfoId" jdbcType="VARCHAR"/>
+        <result column="areainfo_name" property="areainfoName" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select 
+    *
+    from t_areainfo
+    where areainfo_id = #{areainfoId,jdbcType=VARCHAR}
+  </select>
+
+    <!--根据父级分类查询信息-->
+    <select id="queryTareainfoList" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT * FROM t_areaInfo WHERE 1=1
+        <if test="parentId !=null">
+            and parent_id=#{parentId}
+        </if>
+    </select>
+
+</mapper>

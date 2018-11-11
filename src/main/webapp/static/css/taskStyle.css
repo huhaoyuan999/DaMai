@@ -1,0 +1,201 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+#loginInfoAdmin {
+    height: 362px;
+    width: 362px;
+    /*border: 1px solid #FF1469;*/
+    /*z-index: 1;*/
+    /*margin-left: 200px;*/
+    /*margin-top: 100px;*/
+}
+
+ul, ol, li {
+    list-style: none;
+}
+
+#taskList {
+    width: 360px;
+    overflow: hidden;
+}
+
+#taskList > ul li {
+    float: left;
+    width: 116.8px;
+    height: 35px;
+    overflow: hidden;
+    line-height: 35px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#taskList > ul li:first-of-type {
+    margin-left: 0px;
+    margin-right: 0px;
+    color: #FF1469;
+}
+
+#taskList > ul li:nth-child(2) {
+    margin-left: 0px;
+    margin-right: 0px;
+    background-color: lightgrey;
+    color: grey;
+}
+
+#taskList > ul li:last-of-type {
+    background-color: lightgrey;
+    color: grey;
+}
+
+.taskContent {
+    clear: both;
+    height: 330px;
+    overflow: hidden;
+}
+
+#loginTask {
+    display: none;
+}
+
+#growTask {
+    display: none;
+}
+
+#tablesOne, #tablesOne2 {
+    height: 255px;
+    width: 306px;
+    margin-left: 28px;
+    margin-top: 18px;
+}
+
+#HintInformation, #HintInformation2 {
+    height: 26px;
+    width: 300px;
+    border: 1px solid #FF1469;
+    margin-left: 28px;
+    margin-top: 18px;
+    border-radius: 2px;
+    display: none;
+}
+
+#ErrorImage, #ErrorImage2 {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    margin: 4px 0px 0px 8px;
+    float: left;
+}
+
+#ErrorInfo, #ErrorInfo2 {
+    display: inline-block;
+    height: 20px;
+    color: grey;
+    font-size: 14px;
+    line-height: 26px;
+    letter-spacing: 3px;
+    float: left;
+}
+
+#mailboxImg, #mailboxImg2 {
+    float: left;
+}
+
+#mailboxFont, #mailboxFont2 {
+    height: 35px;
+    width: 266px;
+    float: left;
+    border: 0px none;
+    border-radius: 2px;
+}
+
+#inputBOx1, #inputBOx2, #inputBOx3, #inputBOx4 {
+    height: 35px;
+    width: 300px;
+    border: 1px solid grey;
+    float: left;
+    border-radius: 2px;
+}
+
+#inputBOx1:hover {
+    border: 1px solid #FF1469;
+}
+
+#inputBOx2:hover {
+    border: 1px solid #FF1469;
+}
+
+#inputBOx3:hover {
+    border: 1px solid #FF1469;
+}
+
+#inputBOx4:hover {
+    border: 1px solid #FF1469;
+}
+
+#passwordImg, #passwordImg2 {
+    float: left;
+}
+
+#passwordText, #passwordText2 {
+    height: 35px;
+    width: 266px;
+    border: 0px none;
+    float: left;
+    border-radius: 2px;
+}
+
+#submitInfo, #submitInfo2 {
+    height: 35px;
+    width: 300px;
+    border-radius: 3px;
+    font-size: 20px;
+    background-color: #FF1469;
+    border: 2px solid #FF1469;
+    color: white;
+}
+
+#submitInfo:hover {
+    cursor: pointer;
+}
+
+#submitInfo2:hover {
+    cursor: pointer;
+}
+
+#ForgetPassword {
+    text-decoration: none;
+    color: #28A9FF;
+    font-size: 15px;
+    margin-left: 155px;
+}
+
+#registerInfo {
+    text-decoration: none;
+    color: #28A9FF;
+    font-size: 15px;
+}
+
+#TwoDimensional {
+    height: 250px;
+    width: 250px;
+    /*border: 1px solid red;*/
+    margin-left: 50px;
+    margin-top: 30px;
+}
+
+#PromptScan {
+    color: grey;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    margin-left: 12px;
+    margin-bottom: 35px;
+}
+
+#ImageScan {
+    margin-left: 45px;
+}
+

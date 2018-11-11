@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mapper.TaddressMapper">
+
+    <resultMap id="BaseResultMap" type="com.pojo.Taddress">
+        <id column="address_id" property="addressId" jdbcType="BIGINT"/>
+        <result column="address_alias" property="addressAlias" jdbcType="VARCHAR"/>
+        <result column="address_addressee" property="addressAddressee" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="tele_phone" property="telePhone" jdbcType="VARCHAR"/>
+        <result column="detailed" property="detailed" jdbcType="VARCHAR"/>
+        <result column="preferred" property="preferred" jdbcType="BIGINT"/>
+        <association property="provinceName" column="province_id" javaType="com.pojo.Tareainfo"
+                     select="com.mapper.TareainfoMapper.selectByPrimaryKey"/>
+        <association property="cityName" column="city_id" javaType="com.pojo.Tareainfo"
+                     select="com.mapper.TareainfoMapper.selectByPrimaryKey"/>
+        <association property="areaName" column="area_id" javaType="com.pojo.Tareainfo"
+                     select="com.mapper.TareainfoMapper.selectByPrimaryKey"/>
+        <association property="userName" column="user_id" javaType="com.pojo.User"
+                     select="com.mapper.UserMapper.queryUserInfo"/>
+    </resultMap>
+
+    <!--根据用户ID查询用户收货地址-->
+    <select id="selectByUserId" resultMap="BaseResultMap">
+      select * from t_address where user_id=#{userId}
+  </select>
+
+    <!--新增收货地址-->
+    <insert id="insertAddressInfo" parameterType="com.pojo.Taddress">
+        INSERT  INTO `t_address`(`user_id`,`address_alias`,`address_addressee`,`phone`,`tele_phone`,`province_id`,`city_id`,`area_id`,`detailed`,`preferred`) VALUES
+        (#{userId},#{addressAlias},#{addressAddressee},#{phone},#{telePhone},#{provinceId},#{cityId},#{areaId},#{detailed},#{preferred})
+    </insert>
+
+    <!--修改用户地址信息-->
+    <update id="updateAddressInfo" parameterType="com.pojo.Taddress">
+        UPDATE t_address
+        <trim prefix="set" suffixOverrides=",">
+            `tele_phone`=#{telePhone},
+            <if test="addressAlias != null and addressAlias !=''">`address_alias`=#{addressAlias},</if>
+            <if test="addressAddressee !=null and addressAddressee !=''">`address_addressee`=#{addressAddressee},</if>
+            <if test="phone !=null and phone !=''">`phone`=#{phone},</if>
+            <if test="provinceId !=null and provinceId !=''">`province_id`=#{provinceId},</if>
+            <if test="cityId !=null and cityId !=''">`city_id`=#{cityId},</if>
+            <if test="areaId !=null and areaId !=''">`area_id`=#{areaId},</if>
+            <if test="detailed !=null and detailed !=''">`detailed`=#{detailed},</if>
+        </trim>
+        WHERE address_id=#{addressId}
+    </update>
+
+    <!--根据用户ID修改首选地址-->
+    <update id="updateUserId" parameterType="java.lang.Integer">
+        UPDATE t_address SET preferred=0 WHERE user_id=#{userId}
+    </update>
+
+    <!--根据地址ID修改首选地址-->
+    <update id="updateAddressId" parameterType="java.lang.Long">
+        UPDATE t_address SET preferred=1 WHERE address_id=#{addressId}
+    </update>
+
+    <!--删除地址信息-->
+    <delete id="deleteAddressId" parameterType="java.lang.Long">
+        DELETE FROM t_address WHERE address_id=#{addressId}
+    </delete>
+
+    <!--根据ID查询信息-->
+    <select id="queryAddressKey" resultType="com.pojo.Taddress">
+        SELECT * FROM t_address WHERE address_id=#{addressId}
+    </select>
+
+</mapper>

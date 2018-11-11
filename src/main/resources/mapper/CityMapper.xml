@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.CityMapper">
+  <resultMap id="BaseResultMap" type="com.pojo.City">
+    <id column="city_id" jdbcType="INTEGER" property="cityId" />
+    <result column="city_name" jdbcType="VARCHAR" property="cityName" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="areainfo_id" jdbcType="VARCHAR" property="areainfoId" />
+  </resultMap>
+
+  <!--查询所有城市-->
+  <select id="queryAllCityInfo" resultType="com.pojo.City">
+    select city_id,city_name,count,areainfo_id from city ORDER BY `count` DESC;
+  </select>
+
+  <!--查询热门城市-->
+  <select id="queryHotCityInfo" resultType="com.pojo.City">
+    SELECT city_id,city_name,count,areainfo_id FROM city ORDER BY `count` DESC LIMIT 0,9;
+  </select>
+
+  <select id="selectById" resultType="com.pojo.City">
+    select * from city where city_id=#{cityId}
+  </select>
+
+  <select id="selectByName" resultType="string">
+    select areainfo_id from city where city_name=#{name}
+  </select>
+
+
+</mapper>

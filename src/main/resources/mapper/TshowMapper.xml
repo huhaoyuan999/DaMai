@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.TshowMapper">
+      <resultMap id="BaseResultMap" type="com.pojo.Tshow">
+          <id column="show_id" jdbcType="BIGINT" property="showId" />
+          <result column="show_name" jdbcType="VARCHAR" property="showName" />
+          <result column="show_img" jdbcType="VARCHAR" property="showImg" />
+          <result column="show_min_price" jdbcType="DOUBLE" property="showMinPrice" />
+          <result column="show_max_price" jdbcType="DOUBLE" property="showMaxPrice" />
+          <result column="show_place" jdbcType="VARCHAR" property="showPlace" />
+          <result column="categorie_id" jdbcType="BIGINT" property="categorieId" />
+          <result column="areainfo_id" jdbcType="VARCHAR" property="areainfoId" />
+          <result column="show_title" jdbcType="VARCHAR" property="showTitle" />
+          <result column="count" jdbcType="INTEGER" property="count" />
+          <result column="show_status" jdbcType="BIGINT" property="showStatus" />
+          <result column="show_begin_time" jdbcType="TIMESTAMP" property="showBeginTime" />
+          <result column="show_end_time" jdbcType="TIMESTAMP" property="showEndTime" />
+          <association property="tareainfo" column="areainfo_id" javaType="com.pojo.Tareainfo" select="com.mapper.TareainfoMapper.selectByPrimaryKey"/>
+          <association property="tcategorie" column="categorie_id" javaType="com.pojo.Tcategorie" select="com.mapper.TcategorieMapper.selectById" />
+      </resultMap>
+
+    <!--查询全部商品信息-->
+    <select id="queryAll" resultMap="BaseResultMap">
+    select
+    *
+    from t_show
+    ORDER BY `categorie_id` ASC,`count` desc;
+  </select>
+
+    <!--根据城市查询商品信息-->
+    <select id="queryShowInfoByAreainfoId" resultMap="BaseResultMap">
+        SELECT
+        *
+        FROM t_show
+        <where>
+            <if test="areainfoId != null and areainfoId != ''">
+                and areainfo_id = #{areainfoId}
+            </if>
+        </where>
+        ORDER BY `categorie_id` ASC,`count` desc;
+    </select>
+
+    <!--分类查询商品信息-->
+    <select id="queryShowByCategorys" resultMap="BaseResultMap">
+        select * from t_show
+        <where>
+            <if test="tshow.areainfoId!=null and tshow.areainfoId!=''">
+                areainfo_id=#{tshow.areainfoId}
+            </if>
+            <if test="tshow.categorieId!=null and tshow.categorieId!='' and tshow.categorieId!=0">
+                and categorie_id=#{tshow.categorieId}
+            </if>
+            <if test="tshow.showBeginTime!=null">
+                and  #{tshow.showBeginTime} between show_begin_time and show_end_time
+            </if>
+        </where>
+         order by ${pai} desc
+    </select>
+
+
+    <!--根据演出id查询演出详情-->
+    <select id="queryShowDeatilById" resultType="com.pojo.Tshow">
+        SELECT * FROM t_show
+        <where>
+            <if test="showId != null and showId != 0">
+                and show_id = #{showId}
+            </if>
+        </where>
+    </select>
+
+    <!--查询热门演出信息-->
+    <select id="queryHotShowInfo" resultType="com.pojo.Tshow">
+        SELECT * FROM t_show ORDER BY `count` DESC
+    </select>
+
+    <!--根据ID查询商品信息-->
+    <select id="queryShowKey" resultType="com.pojo.Tshow">
+        SELECT * FROM t_show WHERE show_id=#{showId}
+    </select>
+
+</mapper>

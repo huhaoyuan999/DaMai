@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mapper.TcategorieMapper">
+    <resultMap id="BaseResultMap" type="com.pojo.Tcategorie">
+        <id column="categorie_id" property="categorieId" jdbcType="BIGINT"/>
+        <result column="categorie_name" property="categorieName" jdbcType="VARCHAR"/>
+        <result column="categorie_shorthand" property="categorieShorthand" jdbcType="VARCHAR"/>
+        <collection property="tshows" ofType="com.pojo.Tshow" javaType="java.util.List">
+            <id column="show_id" jdbcType="BIGINT" property="showId" />
+            <result column="show_name" jdbcType="VARCHAR" property="showName" />
+            <result column="show_img" jdbcType="VARCHAR" property="showImg" />
+            <result column="show_min_price" jdbcType="DOUBLE" property="showMinPrice" />
+            <result column="show_max_price" jdbcType="DOUBLE" property="showMaxPrice" />
+            <result column="show_place" jdbcType="VARCHAR" property="showPlace" />
+            <result column="categorie_id" jdbcType="BIGINT" property="categorieId" />
+            <result column="areainfo_id" jdbcType="VARCHAR" property="areainfoId" />
+            <result column="show_title" jdbcType="VARCHAR" property="showTitle" />
+            <result column="count" jdbcType="INTEGER" property="count" />
+            <result column="show_status" jdbcType="BIGINT" property="showStatus" />
+            <result column="show_begin_time" jdbcType="TIMESTAMP" property="showBeginTime" />
+            <result column="show_end_time" jdbcType="TIMESTAMP" property="showEndTime" />
+        </collection>
+    </resultMap>
+    <sql id="Base_Column_List">
+    categorie_id, categorie_name,categorie_shorthand
+  </sql>
+    <select id="tcategorieList" resultMap="BaseResultMap">
+      select a.*,b.* from t_categorie as a,t_show as b
+        <where>
+            a.categorie_id=b.categorie_id
+            <if test="areainfoId != null and areainfoId != ''and areainfoId != 0 ">
+                and b.areainfo_id = #{areainfoId}
+            </if>
+        </where>
+
+
+  </select>
+    <select id="selectById" resultType="com.pojo.Tcategorie">
+        select  * from t_categorie where categorie_id=#{categorieId}
+    </select>
+</mapper>
