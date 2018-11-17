@@ -1,5 +1,6 @@
 package com.service;
 
+import com.github.pagehelper.PageInfo;
 import com.pojo.TicketHolder;
 import com.pojo.User;
 
@@ -93,4 +94,19 @@ public interface UserService {
      * @return
      */
     User queryUserInfo(int id);
+
+    /**
+     * 获取用户列表
+     *
+     * @return
+     */
+    PageInfo<User> queryUserAllInfo(Integer pageNo, Integer pageSize);
+
+    /**
+     * 删除指定用户信息
+     *
+     * @param id
+     * @return
+     */
+    int deleteUserInfo(Integer id);
 }

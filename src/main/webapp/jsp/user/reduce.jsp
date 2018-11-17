@@ -53,15 +53,32 @@
             <h2 class="coupon_menu_title">账户中心</h2>
             <ul class="coupon_menu_item">
 
-                <li><a href="${ctx}/address/userAddress/${user.id}">收货地址</a></li>
+                <c:if test="${user.type==0}">
+                    <li><a href="${ctx}/address/userAddress/${user.id}">收货地址</a></li>
+                </c:if>
 
                 <li><a href="${ctx}/user/modular/2">账号设置</a></li>
 
                 <li><a href="${ctx}/user/modular/1">个人信息</a></li>
 
-                <li><a href="${ctx}/user/ticketHolder/${user.id}">常用购票人管理</a></li>
+                <c:if test="${user.type==0}">
+                    <li><a href="${ctx}/user/ticketHolder/${user.id}">常用购票人管理</a></li>
+                </c:if>
 
+                <c:if test="${user.type==1}">
+                    <li><a href="${ctx}/user/userAll/1">用户列表</a></li>
+                </c:if>
             </ul>
+
+            <c:if test="${user.type==1}">
+                <h2 class="coupon_menu_title">商品管理</h2>
+                <ul class="coupon_menu_item">
+
+                    <li><a href="${ctx}/order/goods/1">商品管理</a></li>
+
+                    <li><a href="${ctx}/order/changeGoods">商品上架</a></li>
+                </ul>
+            </c:if>
 
         </div>
     </div>

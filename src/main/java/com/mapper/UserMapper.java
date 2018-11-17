@@ -97,4 +97,19 @@ public interface UserMapper {
      * @return
      */
     User queryUserInfo(@Param("id") int id);
+
+    /**
+     * 获取用户列表
+     *
+     * @return
+     */
+    List<User> queryUserAllInfo();
+
+    /**
+     * 删除指定用户信息
+     *
+     * @param id
+     * @return
+     */
+    int deleteUserInfo(@Param("id") Integer id);
 }

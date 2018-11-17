@@ -36,6 +36,25 @@
                      select="com.mapper.UserMapper.queryUserInfo"/>
     </resultMap>
 
+    <resultMap id="GoodsResultMap" type="com.pojo.Tshow">
+        <id column="show_id" jdbcType="BIGINT" property="showId"/>
+        <result column="show_name" jdbcType="VARCHAR" property="showName"/>
+        <result column="show_img" jdbcType="VARCHAR" property="showImg"/>
+        <result column="show_min_price" jdbcType="DOUBLE" property="showMinPrice"/>
+        <result column="show_max_price" jdbcType="DOUBLE" property="showMaxPrice"/>
+        <result column="show_place" jdbcType="VARCHAR" property="showPlace"/>
+        <result column="categorie_id" jdbcType="BIGINT" property="categorieId"/>
+        <result column="areainfo_id" jdbcType="VARCHAR" property="areainfoId"/>
+        <result column="show_title" jdbcType="VARCHAR" property="showTitle"/>
+        <result column="count" jdbcType="INTEGER" property="count"/>
+        <result column="show_time" jdbcType="VARCHAR" property="showTime"/>
+        <result column="show_status" jdbcType="BIGINT" property="showStatus"/>
+        <result column="show_begin_time" jdbcType="TIMESTAMP" property="showBeginTime"/>
+        <result column="show_end_time" jdbcType="TIMESTAMP" property="showEndTime"/>
+        <association property="tareainfo" column="areainfo_id" javaType="com.pojo.Tareainfo"
+                     select="com.mapper.TareainfoMapper.selectByPrimaryKey"/>
+    </resultMap>
+
     <!--根据用户ID查询用户订单-->
     <select id="queryOrderInfo" resultMap="OrderMap">
       SELECT * FROM t_order WHERE user_id=#{user_id}
@@ -45,5 +64,56 @@
     <select id="queryReduceInfo" resultMap="ReduceMap">
       SELECT * FROM t_reduce WHERE user_id=#{user_id}
     </select>
+
+    <!--根据地址ID删除订单信息-->
+    <delete id="deleteAddressIdInfo" parameterType="java.lang.Long">
+      DELETE FROM t_order WHERE address_id=#{address_id}
+    </delete>
+
+    <!--根据订单ID删除订单信息-->
+    <delete id="deleteOrderIdInfo" parameterType="java.lang.Integer">
+      DELETE FROM t_order WHERE id=#{id}
+    </delete>
+
+    <!--查询商品信息-->
+    <select id="queryGoodsAll" resultMap="GoodsResultMap">
+        SELECT * FROM t_show WHERE show_begin_time &lt; NOW()
+    </select>
+
+    <!--删除指定商品信息-->
+    <delete id="deleteGoodsInfo" parameterType="java.lang.Long">
+        DELETE FROM t_show WHERE show_id=#{showId}
+    </delete>
+
+    <!--查询商品分类信息-->
+    <select id="queryCategoriesAll" resultType="com.pojo.Tcategorie">
+        SELECT * FROM t_categorie
+    </select>
+
+    <!--商品上架-->
+    <insert id="insertGoodsInfo" parameterType="com.pojo.Tshow">
+        INSERT  INTO `t_show`(`show_name`,`show_img`,`show_time`,`show_min_price`,`show_place`,`categorie_id`,`areainfo_id`,`show_title`,`show_status`,`show_begin_time`,`show_end_time`,`show_max_price`) VALUES
+        (#{showName},#{showImg},#{showTime},#{showMinPrice},#{showPlace},#{categorieId},#{areainfoId},#{showTitle},#{showStatus},#{showBeginTime},#{showEndTime},#{showMaxPrice})
+    </insert>
+
+    <!--修改商品-->
+    <update id="updateGoodsInfo" parameterType="com.pojo.Tshow">
+        UPDATE t_show
+        <trim prefix="set" suffixOverrides=",">
+            <if test="showName != null">`show_name`=#{showName},</if>
+            <if test="showImg !=null">`show_img`=#{showImg},</if>
+            <if test="showTime !=null">`show_time`=#{showTime},</if>
+            <if test="showMinPrice !=null">`show_min_price`=#{showMinPrice},</if>
+            <if test="showPlace !=null">`show_place`=#{showPlace},</if>
+            <if test="categorieId !=null">`categorie_id`=#{categorieId},</if>
+            <if test="areainfoId !=null">`areainfo_id`=#{areainfoId},</if>
+            <if test="showTitle !=null">`show_title`=#{showTitle},</if>
+            <if test="showStatus !=null">`show_status`=#{showStatus},</if>
+            <if test="showBeginTime !=null">`show_begin_time`=#{showBeginTime},</if>
+            <if test="showEndTime !=null">`show_end_time`=#{showEndTime},</if>
+            <if test="showMaxPrice !=null">`show_max_price`=#{showMaxPrice},</if>
+        </trim>
+        WHERE show_id=#{showId}
+    </update>
 
 </mapper>

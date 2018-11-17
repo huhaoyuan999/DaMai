@@ -14,13 +14,45 @@
 
     <!--用户注册-->
     <insert id="insertInfo" parameterType="com.pojo.User">
-        INSERT  INTO `t_user`(`nickname`,`password`,`sex`,`loginName`,`type`)
-        VALUES ('麦子',#{password},1,#{loginName},0)
+        INSERT INTO `t_user`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            `nickname`,`password`,`sex`,`loginName`,`type`,
+            <if test="userName != null and userName!=''">`userName`</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <choose>
+                <when test="nickname != null and nickname!=''">
+                    #{nickname},
+                </when>
+                <otherwise>
+                    '麦子',
+                </otherwise>
+            </choose>
+            <if test="password != null and password!=''">#{password},</if>
+            <choose>
+                <when test="sex != null">
+                    #{sex},
+                </when>
+                <otherwise>
+                    '1',
+                </otherwise>
+            </choose>
+            <if test="loginName != null and loginName!=''">#{loginName},</if>
+            <choose>
+                <when test="type != null">
+                    #{type},
+                </when>
+                <otherwise>
+                    '0',
+                </otherwise>
+            </choose>
+            <if test="userName != null and userName!=''">#{userName},</if>
+        </trim>
     </insert>
 
     <!--查询是否有此账号-->
     <select id="queryLoginName" resultType="int">
-          SELECT COUNT(1) FROM `t_user` WHERE loginName=#{loginName}
+        SELECT COUNT(1) FROM `t_user` WHERE loginName=#{loginName}
     </select>
 
     <!--修改用户信息-->
@@ -31,6 +63,7 @@
             <if test="nickname !=null and nickname !=''">`nickname`=#{nickname},</if>
             <if test="password !=null and password !=''">`password`=#{password},</if>
             <if test="sex !=null">`sex`=#{sex},</if>
+            <if test="type !=null">`type`=#{type},</if>
             <if test="identityCode !=null and identityCode !=''">`identityCode`=#{identityCode},</if>
             <if test="date !=null">`date`=#{date},</if>
             <if test="loginName !=null and loginName !=''">`loginName`=#{loginName},</if>
@@ -56,7 +89,7 @@
 
     <!--添加常用购票人-->
     <insert id="insertTicketHolder" parameterType="com.pojo.TicketHolder">
-        INSERT  INTO `t_ticketHolder`(`name`,`type`,`document`,`t_user`) VALUES (#{name},#{type},#{document},#{t_user})
+        INSERT INTO `t_ticketHolder`(`name`,`type`,`document`,`t_user`) VALUES (#{name},#{type},#{document},#{t_user})
     </insert>
 
     <!--删除常用购票人-->
@@ -68,4 +101,14 @@
     <select id="queryUserInfo" parameterType="int" resultType="com.pojo.User">
         SELECT * FROM t_user WHERE id=#{id}
     </select>
+
+    <!--获取用户列表-->
+    <select id="queryUserAllInfo" resultType="com.pojo.User">
+        SELECT * FROM t_user ORDER BY `type` DESC
+    </select>
+
+    <!--删除指定用户信息-->
+    <delete id="deleteUserInfo" parameterType="java.lang.Integer">
+       DELETE FROM t_user WHERE id=#{id}
+    </delete>
 </mapper>

@@ -1,5 +1,7 @@
 package com.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.mapper.UserMapper;
 import com.pojo.TicketHolder;
 import com.pojo.User;
@@ -49,7 +51,9 @@ public class UserServiceImpl implements UserService {
         if (num > 0) {
             return 0;
         } else {
-            return userMapper.insertInfo(new User(SecurityUtils.md5Hex(user.getPassword()), user.getLoginName()));
+            user.setPassword(SecurityUtils.md5Hex(user.getPassword()));
+            System.out.println("你好");
+            return userMapper.insertInfo(user);
         }
     }
 
@@ -154,6 +158,33 @@ public class UserServiceImpl implements UserService {
     @Override
     public User queryUserInfo(int id) {
         return userMapper.queryUserInfo(id);
+    }
+
+    /**
+     * 获取用户列表
+     *
+     * @return
+     */
+    @Override
+    public PageInfo<User> queryUserAllInfo(Integer pageNo, Integer pageSize) {
+        //调用页面助手
+        PageHelper.startPage(pageNo, pageSize);
+        //调用DAO层方法
+        List<User> list = userMapper.queryUserAllInfo();
+        // 调用这个构造器，我们的分页助手对象就构建成功
+        PageInfo<User> pageInfo = new PageInfo<User>(list);
+        return pageInfo;
+    }
+
+    /**
+     * 删除指定用户信息
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public int deleteUserInfo(Integer id) {
+        return userMapper.deleteUserInfo(id);
     }
 
 }

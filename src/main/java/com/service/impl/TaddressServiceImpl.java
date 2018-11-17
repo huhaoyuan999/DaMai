@@ -1,6 +1,7 @@
 package com.service.impl;
 
 
+import com.mapper.OrderMapper;
 import com.mapper.TaddressMapper;
 import com.mapper.TareainfoMapper;
 import com.pojo.Taddress;
@@ -27,6 +28,10 @@ public class TaddressServiceImpl implements TaddressService {
     @Autowired
     @Qualifier("tareainfoMapper")
     TareainfoMapper tareainfoMapper;
+
+    @Autowired
+    @Qualifier("orderMapper")
+    private OrderMapper orderMapper;
 
     /**
      * 查询用户收货地址
@@ -108,6 +113,10 @@ public class TaddressServiceImpl implements TaddressService {
      */
     @Override
     public int deleteAddressId(Long addressId) {
+        int num = orderMapper.deleteAddressIdInfo(addressId);
+        if (num < 1) {
+            return 0;
+        }
         return taddressMapper.deleteAddressId(addressId);
     }
 

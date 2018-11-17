@@ -35,6 +35,14 @@ public class User implements Serializable {
         this.loginName = loginName;
     }
 
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -65,14 +73,6 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Integer getSex() {
-        return sex;
-    }
-
-    public void setSex(Integer sex) {
-        this.sex = sex;
     }
 
     public String getIdentityCode() {

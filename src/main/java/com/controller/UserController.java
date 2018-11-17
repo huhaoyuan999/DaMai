@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.pojo.TicketHolder;
 import com.pojo.User;
 import com.service.UserService;
@@ -106,9 +107,10 @@ public class UserController {
     @ResponseBody
     public String updateInfo(@RequestBody User user, HttpSession session) {
         int num = userService.updateInfo(user);
+        User user1 = userService.queryUserInfo(user.getId());
         if (num == 1) {
             if (user.getDate() == null) {
-                session.setAttribute("user", user);
+                session.setAttribute("user", user1);
             } else {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String str = sdf.format(user.getDate());
@@ -117,7 +119,7 @@ public class UserController {
                 session.setAttribute("birthY", sourceStrArray[0]);
                 session.setAttribute("birthM", sourceStrArray[1]);
                 session.setAttribute("birthD", sourceStrArray[2]);
-                session.setAttribute("user", user);
+                session.setAttribute("user", user1);
             }
         }
         return num == 1 ? "true" : "false";
@@ -290,5 +292,52 @@ public class UserController {
         }
     }
 
+    /**
+     * 获取用户列表
+     *
+     * @return
+     */
+    @RequestMapping("/userAll/{pageNo}")
+    public String queryUserAllInfo(@PathVariable("pageNo") Integer pageNo, Model model) {
+        PageInfo<User> userList = userService.queryUserAllInfo(pageNo, 8);
+        model.addAttribute("userPage", userList);
+        return "admin/userAdmin";
+    }
+
+    /**
+     * 根据ID查询指定用户
+     *
+     * @return
+     */
+    @RequestMapping("/queryUser/{id}")
+    @ResponseBody
+    public User queryUserIdInfo(@PathVariable("id") Integer id) {
+        return userService.queryUserInfo(id);
+    }
+
+    /**
+     * 修改指定用户
+     *
+     * @return
+     */
+    @RequestMapping("/updateUser")
+    @ResponseBody
+    public int updateUserIdInfo(@RequestBody User user) {
+        return userService.updateInfo(user);
+    }
+
+    /**
+     * 删除指定用户信息
+     *
+     * @return
+     */
+    @RequestMapping("/deleteUser/{id}")
+    @ResponseBody
+    public int deleteUserInfo(@PathVariable("id") Integer id) {
+        System.out.println("进来了");
+        int num = userService.deleteUserInfo(id);
+        System.out.println("得到了：" + num);
+        return num;
+    }
 
 }

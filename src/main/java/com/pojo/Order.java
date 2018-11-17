@@ -17,9 +17,9 @@ public class Order implements Serializable {
     private Double discount;//优惠价格(使用优惠券优惠了多少钱)
     private Integer status;//交易状态,0:交易关闭,1:待付款,2:已付款
 
-//    private Integer user_id;//用户id(外键)
-//    private Integer show_id;//演出id(外键)
-//    private Integer address_id;//收货地址id(外键)
+    //    private Integer user_id;//用户id(外键)
+    //  private Integer show_id;//演出id(外键)
+    private Long address_id;//收货地址id(外键)
 
     private User user;//用户集合
     private Tshow tshow;//商品集合
@@ -125,7 +125,7 @@ public class Order implements Serializable {
         this.status = status;
     }
 
-//    public Integer getUser_id() {
+    //    public Integer getUser_id() {
 //        return user_id;
 //    }
 //
@@ -141,13 +141,13 @@ public class Order implements Serializable {
 //        this.show_id = show_id;
 //    }
 //
-//    public Integer getAddress_id() {
-//        return address_id;
-//    }
-//
-//    public void setAddress_id(Integer address_id) {
-//        this.address_id = address_id;
-//    }
+    public Long getAddress_id() {
+        return address_id;
+    }
+
+    public void setAddress_id(Long address_id) {
+        this.address_id = address_id;
+    }
 
     public Date getCreateDate() {
         return createDate;

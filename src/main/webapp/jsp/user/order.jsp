@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/ui-min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/index3.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/saved_resource(1).css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/cueLayer.css">
     <link rel="shortcut icon" type="image/x-icon" href="https://passport.damai.cn/images/favicon.ico">
 
     <style type="text/css">
@@ -53,15 +54,33 @@
             <h2 class="coupon_menu_title">账户中心</h2>
             <ul class="coupon_menu_item">
 
-                <li><a href="${ctx}/address/userAddress/${user.id}">收货地址</a></li>
+                <c:if test="${user.type==0}">
+                    <li><a href="${ctx}/address/userAddress/${user.id}">收货地址</a></li>
+                </c:if>
 
                 <li><a href="${ctx}/user/modular/2">账号设置</a></li>
 
                 <li><a href="${ctx}/user/modular/1">个人信息</a></li>
 
-                <li><a href="${ctx}/user/ticketHolder/${user.id}">常用购票人管理</a></li>
+                <c:if test="${user.type==0}">
+                    <li><a href="${ctx}/user/ticketHolder/${user.id}">常用购票人管理</a></li>
+                </c:if>
+
+                <c:if test="${user.type==1}">
+                    <li><a href="${ctx}/user/userAll/1">用户列表</a></li>
+                </c:if>
 
             </ul>
+
+            <c:if test="${user.type==1}">
+                <h2 class="coupon_menu_title">商品管理</h2>
+                <ul class="coupon_menu_item">
+
+                    <li><a href="${ctx}/order/goods/1">商品管理</a></li>
+
+                    <li><a href="${ctx}/order/changeGoods">商品上架</a></li>
+                </ul>
+            </c:if>
 
         </div>
     </div>
@@ -97,7 +116,7 @@
                              data-spm-anchor-id="a2oeg.orderlist.list.i0.6edcIYemIYem8Z">
 
                             <c:forEach items="${orderList}" var="order" varStatus="indexs">
-                                <div class="next-loading-component">
+                                <div class="next-loading-component" id="deleteOrder${order.id}">
                                     <div class="next-col order-list-item" data-spm="item_0">
                                         <div class="next-row order-list-item-header">订单号：${order.number}</div>
                                         <div class="next-row order-list-item-bottom">
@@ -148,7 +167,11 @@
                                                         <div class="next-row pick-seat-info" data-exp="true"
                                                              within24="false"
                                                              ic_id="167164" usercode="117640320" data-spm="dnotice"
-                                                             data-spm-anchor-id="a2oeg.orderlist.item_0.dnotice.6edcIYemIYem8Z"></div>
+                                                             data-spm-anchor-id="a2oeg.orderlist.item_0.dnotice.6edcIYemIYem8Z">
+                                                            &nbsp;&nbsp;<br/><input type="hidden" id="orderId"/>
+                                                            <a href="javaScript:void(0)" style="color: #2f97b4;"
+                                                               onclick="showInfo(${order.id})">删除</a><br/>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -182,10 +205,37 @@
         </div>
     </div>
     <%--右边主体部分结束--%>
-
 </div>
 <!--中间主体信息结束-->
 
+<!--操作提示层开始-->
+<div id="notify-window" style="display:none">
+    <!--透明遮罩层-->
+    <div class="mask-layer"></div>
+    <!--弹出层-->
+    <div class="dm-layer-box" style="width:376px;margin-left:-188px;top:50%; margin-top:-100px;">
+        <div class="dm-layer">
+            <div class="hd">
+                <span style="display: inline-block;height: 30px;width: 30px;" id="showImage">
+                    <img src="${ctx}/static/image/huhaoyuantishi.jpg" width="30" height="30"
+                         style="border-radius: 15px">
+                </span>
+                <h3 id="headHints" style="display: inline-block;">&nbsp;&nbsp;提示</h3>
+                <a href="javascript:void(0)" class="close" onclick="hideInfo()"></a>
+            </div>
+            <div class="c-n">
+                <p id="notify-msg" class="t-c">您确定要删除这条订单记录吗？</p>
+                <div class="dm-layer-btn">
+                    <button class="btn01 mt20" type="button" id="confirmSure" name="bb" onclick="deleteOrderInfo()">确定
+                    </button>
+                    &nbsp;&nbsp;
+                    <button class="btn04" id="confirmExit" onclick="hideInfo()">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--操作提示层结束-->
 
 <!--返回顶部及帮助中心-->
 <div class="new-fast">

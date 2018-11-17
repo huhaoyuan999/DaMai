@@ -51,8 +51,11 @@
                 <dl>
 
                     <dt>账户中心</dt>
-                    <dd><a id="nav_MyAddress" href="${ctx}/address/userAddress/${user.id}" title="收货地址"
-                                                 domain=""><span>收货地址</span></a></dd>
+
+                    <c:if test="${user.type==0}">
+                        <dd><a id="nav_MyAddress" href="${ctx}/address/userAddress/${user.id}" title="收货地址"
+                               domain=""><span>收货地址</span></a></dd>
+                    </c:if>
 
                     <c:if test="${modular==1}">
                         <dd><a href="${ctx}/user/modular/2"
@@ -71,8 +74,23 @@
                         <dd><a href="${ctx}/user/modular/1" title="个人信息" domain=""><span>个人信息</span></a></dd>
                     </c:if>
 
-                    <dd><a id="nav_MyInfo2" href="${ctx}/user/ticketHolder/${user.id}"
-                           title="常用购票人" domain=""><span>常用购票人</span></a></dd>
+                    <c:if test="${user.type==0}">
+                        <dd><a id="nav_MyInfo2" href="${ctx}/user/ticketHolder/${user.id}"
+                               title="常用购票人" domain=""><span>常用购票人</span></a></dd>
+                    </c:if>
+
+                    <c:if test="${user.type==1}">
+                        <dd><a href="${ctx}/user/userAll/1"
+                               title="用户列表" domain=""><span>用户列表</span></a></dd>
+
+                        <dt>商品管理</dt>
+
+                        <dd><a href="${ctx}/order/goods/1"
+                               title="商品管理" domain=""><span>商品管理</span></a></dd>
+
+                        <dd><a href="${ctx}/order/changeGoods"
+                               title="商品上架" domain=""><span>商品上架</span></a></dd>
+                    </c:if>
                 </dl>
 
                 <script type="text/javascript">
@@ -406,7 +424,8 @@
         <div class="dm-layer">
             <div class="hd">
                 <span style="display: inline-block;height: 30px;width: 30px;" id="showImage">
-                    <img src="${ctx}/static/image/huhaoyuantishi.jpg" width="30" height="30" style="border-radius: 15px">
+                    <img src="${ctx}/static/image/huhaoyuantishi.jpg" width="30" height="30"
+                         style="border-radius: 15px">
                 </span>
                 <h3 id="headHints" style="display: inline-block;">&nbsp;&nbsp;提示</h3>
                 <a href="javascript:void(0)" class="close" onclick="hideInfo()"></a>
@@ -496,6 +515,7 @@
     birthM(${birthM});
     birthD(${birthD});
 </script>
+
 <script src="${pageContext.request.contextPath }/static/js/jquery-1.12.4.js"></script>
 <script src="${pageContext.request.contextPath }/static/js/js/ownInfo.js"></script>
 </body>

@@ -1,13 +1,15 @@
 package com.pojo;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * t_show
- * @author 
+ *
+ * @author
  */
 public class Tshow implements Serializable {
     /**
@@ -59,7 +61,7 @@ public class Tshow implements Serializable {
 
     private Tareainfo tareainfo;
 
-    private  Tcategorie tcategorie;
+    private Tcategorie tcategorie;
 
     public Tareainfo getTareainfo() {
         return tareainfo;
@@ -81,10 +83,20 @@ public class Tshow implements Serializable {
      * 演出状态，1:预定，2:预售，3:售票中
      */
     private Long showStatus;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date showBeginTime;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date showEndTime;
+
+    private String showTime;
+
+    public String getShowTime() {
+        return showTime;
+    }
+
+    public void setShowTime(String showTime) {
+        this.showTime = showTime;
+    }
 
     private static final long serialVersionUID = 1L;
 

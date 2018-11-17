@@ -43,11 +43,11 @@ function updateInfo() {
             data: JSON.stringify(user),
             success: function (data) {
                 if (data == "true") {
-                    $("#notify-window").show();
                     $("#notify-msg").text("您的个人信息修改成功");
-                } else {
                     $("#notify-window").show();
+                } else {
                     $("#notify-msg").text("您的个人信息修改失败");
+                    $("#notify-window").show();
                 }
             }
         })
@@ -122,5 +122,26 @@ function hideInfo() {
     $("#notify-window").hide();
 }
 
+function showInfo(id) {
+    $("#orderId").val(id);
+    $("#notify-window").show();
+}
+
+/**
+ * 根据ID删除订单
+ */
+function deleteOrderInfo() {
+    $("#notify-window").hide();
+    var id = $("#orderId").val();
+    $.post("/damai/order/delete/" + id + "", deleteOrder);
+
+    function deleteOrder(data) {
+        if (data == 1) {
+            $("#deleteOrder" + id + "").remove();
+        } else {
+            alert("删除失败");
+        }
+    }
+}
 
 
