@@ -12,4 +12,5 @@ public interface CityMapper {
     City selectById(@Param("cityId") Integer cityId);
     String  selectByName(@Param("name") String name);
 
+    List<City> queryByShowName(@Param("showName") String showName);
 }

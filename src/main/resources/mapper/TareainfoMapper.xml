@@ -19,9 +19,10 @@
     <!--根据父级分类查询信息-->
     <select id="queryTareainfoList" resultMap="BaseResultMap" parameterType="java.lang.String">
         SELECT * FROM t_areaInfo WHERE 1=1
-        <if test="parentId !=null">
-            and parent_id=#{parentId}
-        </if>
+        <choose>
+            <when test="parentId == null">AND parent_id IS NULL</when>
+            <otherwise>AND parent_id=#{parentId}</otherwise>
+        </choose>
     </select>
 
 </mapper>

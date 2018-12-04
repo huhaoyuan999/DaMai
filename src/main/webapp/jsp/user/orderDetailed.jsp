@@ -7,7 +7,6 @@
     <link rel="shortcut icon" href="https://gw.alicdn.com/tfs/TB1fGH0fgMPMeJjy1XcXXXpppXa-16-16.ico"
           type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="${ctx}/static/css/index5.css">
-    <%--<link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/index3.css">--%>
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/saved_resource(1).css">
     <title>我的大麦</title>
 </head>
@@ -4937,214 +4936,212 @@
 
 <!--中间主体信息开始-->
 <div class="w1200">
-    <c:forEach items="${orderList}" var="order" varStatus="indexs">
-        <c:if test="${order.id==info}">
-            <div class="dm_coupon_right">
-                <div class="navigation" data-spm-anchor-id="a2oeg.orderdetail.0.i0.3ad6HwQ4HwQ4vR"><a
-                        href="https://www.damai.cn/">首页</a> <span>&gt;</span> <a
-                        href="javascript:void(0);">我的大麦</a><span>&gt;</span><a
-                        href="${ctx}/order/query/${user.id}/0">订单管理</a><span>&gt;</span><span
-                        class="cur">订单编号：${order.number}</span></div>
-                <hr>
-                <div id="container">
-                    <div class="next-loading order-info">
-                        <div class="next-loading-component">
-                            <div style="display: block;">
-                                <div class="next-row next-row-justify-space-between order-info-top">
-                                    <div class="next-col order-info-left">
-                                        <div class="next-row next-row-justify-space-between order-left-top">
-                                            <div class="next-col">订单号：${order.number}</div>
-                                        </div>
-                                        <div class="next-row next-row-justify-space-between next-row-align-bottom">
-                                            <div class="next-col order-info-left-bottom-left"><span
-                                                    class="order-status-desc">
+
+    <div class="dm_coupon_right">
+        <div class="navigation" data-spm-anchor-id="a2oeg.orderdetail.0.i0.3ad6HwQ4HwQ4vR"><a
+                href="https://www.damai.cn/">首页</a> <span>&gt;</span> <a
+                href="javascript:void(0);">我的大麦</a><span>&gt;</span><a
+                href="${ctx}/order/query/${user.id}/0">订单管理</a><span>&gt;</span><span
+                class="cur">订单编号：${order.number}</span></div>
+        <hr>
+        <div id="container">
+            <div class="next-loading order-info">
+                <div class="next-loading-component">
+                    <div style="display: block;">
+                        <div class="next-row next-row-justify-space-between order-info-top">
+                            <div class="next-col order-info-left">
+                                <div class="next-row next-row-justify-space-between order-left-top">
+                                    <div class="next-col">订单号：${order.number}</div>
+                                </div>
+                                <div class="next-row next-row-justify-space-between next-row-align-bottom">
+                                    <div class="next-col order-info-left-bottom-left"><span
+                                            class="order-status-desc">
                                                   <c:if test="${order.status==0}">交易关闭</c:if>
                                                     <c:if test="${order.status==1}">待付款</c:if>
                                                     <c:if test="${order.status==2}">已付款</c:if>
                                             </span><span
-                                                    class="order-status-info"></span></div>
-                                            <div class="next-col order-price">
-                                                需付款：<em>￥${order.num*order.price+order.transport-order.discount}</em>
-                                            </div>
-                                        </div>
+                                            class="order-status-info"></span></div>
+                                    <div class="next-col order-price">
+                                        需付款：<em>￥${order.num*order.price+order.transport-order.discount}</em>
                                     </div>
                                 </div>
-                                <div style="display: none;"></div>
-                                <div class="next-table order-info-list">
-                                    <div class="next-table-inner">
-                                        <div class="next-table-header">
-                                            <div class="next-table-header-inner">
-                                                <table>
-                                                    <colgroup>
-                                                        <col style="width: 35%;">
-                                                        <col style="width: 17%;">
-                                                        <col style="width: 11%;">
-                                                        <col style="width: 11%;">
-                                                        <col style="width: 11%;">
-                                                        <col style="width: 15%;">
-                                                    </colgroup>
-                                                    <tbody>
-                                                    <tr>
-                                                        <th rowspan="1" class="next-table-header-node first single">
-                                                            <div class="next-table-cell-wrapper">项目信息</div>
-                                                        </th>
-                                                        <th rowspan="1" class="next-table-header-node seatInfo">
-                                                            <div class="next-table-cell-wrapper">座位信息</div>
-                                                        </th>
-                                                        <th rowspan="1" class="next-table-header-node">
-                                                            <div class="next-table-cell-wrapper">单价</div>
-                                                        </th>
-                                                        <th rowspan="1" class="next-table-header-node">
-                                                            <div class="next-table-cell-wrapper">票品张数</div>
-                                                        </th>
-                                                        <th rowspan="1" class="next-table-header-node">
-                                                            <div class="next-table-cell-wrapper">优惠</div>
-                                                        </th>
-                                                        <th rowspan="1" class="next-table-header-node last">
-                                                            <div class="next-table-cell-wrapper">小计</div>
-                                                        </th>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="next-table-body">
-                                            <table>
-                                                <colgroup>
-                                                    <col style="width: 35%;">
-                                                    <col style="width: 17%;">
-                                                    <col style="width: 11%;">
-                                                    <col style="width: 11%;">
-                                                    <col style="width: 11%;">
-                                                    <col style="width: 15%;">
-                                                </colgroup>
-                                                <tbody>
-                                                <tr class="next-table-row last first">
-                                                    <td class="single next-table-cell first" colspan="1" rowspan="1">
-                                                        <div class="next-table-cell-wrapper">
-                                                            <div class="next-row project-name-wrapper" data-spm="list">
-                                                                <div class="next-col project-name-img pointer"><img
-                                                                        src="${ctx}/static/images/${order.tshow.showImg}"
-                                                                        data-spm="ditempic"></div>
-                                                                <div class="next-col project-name-right">
-                                                                    <div class="next-row project-name pointer"
-                                                                         data-spm="dtitle">${order.tshow.showName}
-                                                                    </div>
-                                                                    <div class="next-row project-name-perform">
-                                                                        演出场次:<fmt:formatDate
-                                                                            value="${order.tshow.showBeginTime}"
-                                                                            pattern="yyyy-MM-dd hh:mm"/>
-                                                                    </div>
-                                                                    <div class="next-row project-name-venue">
-                                                                        演出场馆:${order.tshow.showPlace}
-                                                                    </div>
-                                                                    <div class="next-row project-name-tips"></div>
-                                                                </div>
+                            </div>
+                        </div>
+                        <div style="display: none;"></div>
+                        <div class="next-table order-info-list">
+                            <div class="next-table-inner">
+                                <div class="next-table-header">
+                                    <div class="next-table-header-inner">
+                                        <table>
+                                            <colgroup>
+                                                <col style="width: 35%;">
+                                                <col style="width: 17%;">
+                                                <col style="width: 11%;">
+                                                <col style="width: 11%;">
+                                                <col style="width: 11%;">
+                                                <col style="width: 15%;">
+                                            </colgroup>
+                                            <tbody>
+                                            <tr>
+                                                <th rowspan="1" class="next-table-header-node first single">
+                                                    <div class="next-table-cell-wrapper">项目信息</div>
+                                                </th>
+                                                <th rowspan="1" class="next-table-header-node seatInfo">
+                                                    <div class="next-table-cell-wrapper">座位信息</div>
+                                                </th>
+                                                <th rowspan="1" class="next-table-header-node">
+                                                    <div class="next-table-cell-wrapper">单价</div>
+                                                </th>
+                                                <th rowspan="1" class="next-table-header-node">
+                                                    <div class="next-table-cell-wrapper">票品张数</div>
+                                                </th>
+                                                <th rowspan="1" class="next-table-header-node">
+                                                    <div class="next-table-cell-wrapper">优惠</div>
+                                                </th>
+                                                <th rowspan="1" class="next-table-header-node last">
+                                                    <div class="next-table-cell-wrapper">小计</div>
+                                                </th>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="next-table-body">
+                                    <table>
+                                        <colgroup>
+                                            <col style="width: 35%;">
+                                            <col style="width: 17%;">
+                                            <col style="width: 11%;">
+                                            <col style="width: 11%;">
+                                            <col style="width: 11%;">
+                                            <col style="width: 15%;">
+                                        </colgroup>
+                                        <tbody>
+                                        <tr class="next-table-row last first">
+                                            <td class="single next-table-cell first" colspan="1" rowspan="1">
+                                                <div class="next-table-cell-wrapper">
+                                                    <div class="next-row project-name-wrapper" data-spm="list">
+                                                        <div class="next-col project-name-img pointer"><img
+                                                                src="${ctx}/static/image/${order.tshow.showImg}"
+                                                                data-spm="ditempic"></div>
+                                                        <div class="next-col project-name-right">
+                                                            <div class="next-row project-name pointer"
+                                                                 data-spm="dtitle">${order.tshow.showName}
                                                             </div>
+                                                            <div class="next-row project-name-perform">
+                                                                演出场次:<fmt:formatDate
+                                                                    value="${order.tshow.showBeginTime}"
+                                                                    pattern="yyyy-MM-dd hh:mm"/>
+                                                            </div>
+                                                            <div class="next-row project-name-venue">
+                                                                演出场馆:${order.tshow.showPlace}
+                                                            </div>
+                                                            <div class="next-row project-name-tips"></div>
                                                         </div>
-                                                    </td>
-                                                    <td class="seatInfo next-table-cell">
-                                                        <div class="next-table-cell-wrapper"></div>
-                                                    </td>
-                                                    <td class="next-table-cell">
-                                                        <div class="next-table-cell-wrapper">￥${order.price}</div>
-                                                    </td>
-                                                    <td class="next-table-cell">
-                                                        <div class="next-table-cell-wrapper">${order.num}</div>
-                                                    </td>
-                                                    <td class="next-table-cell">
-                                                        <div class="next-table-cell-wrapper"><span
-                                                                class="">${order.discount}</span>
-                                                        </div>
-                                                    </td>
-                                                    <td class="next-table-cell last">
-                                                        <div class="next-table-cell-wrapper"><span
-                                                                class="total">${order.num*order.price+order.transport-order.discount}</span>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="display: none;"></div>
-                                <div class="next-row order-info-grid grid-three">
-                                    <div class="next-col grid-delivery">
-                                        <div class="next-row gird-col-title">配送信息</div>
-                                        <div class="next-row">
-                                            <div class="grid-field-title">配送方式：</div>
-                                            <c:if test="${order.mode==1}">电子票</c:if>
-                                            <c:if test="${order.mode==2}">快递票</c:if>
-                                        </div>
-                                        <div class="next-row on-site">
-                                            <div class="grid-field-title">
-                                                <c:if test="${order.mode==1}">取票地址：</c:if>
-                                                <c:if test="${order.mode==2}">配送地址：</c:if>
-                                            </div>
-                                            <div class="next-col on-site-address">
-                                                <c:if test="${order.mode==1}">如需查看取票地址，请联系大麦客服，营业时间：上午9：00-下午18：00</c:if>
-                                                <c:if test="${order.mode==2}">
-                                                    ${order.address}
-                                                    ${order.taddress.detailed}
-                                                </c:if>
-                                            </div>
-                                        </div>
-                                        <div class="next-row">
-                                            <div class="grid-field-title">联系人：</div>
-                                                ${order.taddress.addressAddressee}
-                                        </div>
-                                        <div class="next-row">
-                                            <div class="grid-field-title">手机号：</div>
-                                                ${order.taddress.phone}
-                                        </div>
-                                    </div>
-                                    <div class="next-col grid-order">
-                                        <div class="next-row gird-col-title">订单信息</div>
-                                        <div class="next-row">订单编号： ${order.number}</div>
-                                        <div class="next-row">创建时间： <fmt:formatDate value="${order.createDate}"
-                                                                                    pattern="yyyy-MM-dd hh:mm"/></div>
-                                        <div class="next-row">发货时间： <fmt:formatDate value="${order.deliveryDate}"
-                                                                                    pattern="yyyy-MM-dd hh:mm"/></div>
-                                        <div class="next-row"></div>
-                                        <div class="next-row"></div>
-                                    </div>
-                                    <div class="next-col grid-invoice hide">
-                                        <div class="next-row gird-col-title">发票信息</div>
-                                        <div class="next-row">
-                                            <div class="next-col">发票类型：</div>
-                                            <div class="next-col grid-invoice-content"></div>
-                                        </div>
-                                    </div>
-                                    <div class="next-col grid-pay">
-                                        <div class="next-row gird-col-title">金额明细</div>
-                                        <div class="next-row">
-                                            商品总价：￥${order.num*order.price+order.transport-order.discount}</div>
-                                        <div class="next-row"></div>
-                                        <div class="next-row"></div>
-                                        <div class="next-row"></div>
-                                        <div class="next-row"></div>
-                                        <div class="next-row"></div>
-                                        <div class="next-row"></div>
-                                        <div class="next-row"></div>
-                                    </div>
-                                </div>
-                                <div class="order-info-buyers" style="display: none;"></div>
-                            </div>
-                            <div class="next-row order-errors" style="display: none;">
-                                <div class="next-col error-image"><img
-                                        src="${ctx}/static/image/TB11puPCgmTBuNjy1XbXXaMrVXa-238-168.png">
-                                </div>
-                                <div class="next-col error-text">
-                                    <div class="next-row error-msg"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="seatInfo next-table-cell">
+                                                <div class="next-table-cell-wrapper"></div>
+                                            </td>
+                                            <td class="next-table-cell">
+                                                <div class="next-table-cell-wrapper">￥${order.price}</div>
+                                            </td>
+                                            <td class="next-table-cell">
+                                                <div class="next-table-cell-wrapper">${order.num}</div>
+                                            </td>
+                                            <td class="next-table-cell">
+                                                <div class="next-table-cell-wrapper"><span
+                                                        class="">${order.discount}</span>
+                                                </div>
+                                            </td>
+                                            <td class="next-table-cell last">
+                                                <div class="next-table-cell-wrapper"><span
+                                                        class="total">${order.num*order.price+order.transport-order.discount}</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
+                        </div>
+                        <div style="display: none;"></div>
+                        <div class="next-row order-info-grid grid-three">
+                            <div class="next-col grid-delivery">
+                                <div class="next-row gird-col-title">配送信息</div>
+                                <div class="next-row">
+                                    <div class="grid-field-title">配送方式：</div>
+                                    <c:if test="${order.mode==1}">电子票</c:if>
+                                    <c:if test="${order.mode==2}">快递票</c:if>
+                                </div>
+                                <div class="next-row on-site">
+                                    <div class="grid-field-title">
+                                        <c:if test="${order.mode==1}">取票地址：</c:if>
+                                        <c:if test="${order.mode==2}">配送地址：</c:if>
+                                    </div>
+                                    <div class="next-col on-site-address">
+                                        <c:if test="${order.mode==1}">如需查看取票地址，请联系大麦客服，营业时间：上午9：00-下午18：00</c:if>
+                                        <c:if test="${order.mode==2}">
+                                            ${order.address}
+                                            ${order.taddress.detailed}
+                                        </c:if>
+                                    </div>
+                                </div>
+                                <div class="next-row">
+                                    <div class="grid-field-title">联系人：</div>
+                                    ${order.taddress.addressAddressee}
+                                </div>
+                                <div class="next-row">
+                                    <div class="grid-field-title">手机号：</div>
+                                    ${order.taddress.phone}
+                                </div>
+                            </div>
+                            <div class="next-col grid-order">
+                                <div class="next-row gird-col-title">订单信息</div>
+                                <div class="next-row">订单编号： ${order.number}</div>
+                                <div class="next-row">创建时间： <fmt:formatDate value="${order.createDate}"
+                                                                            pattern="yyyy-MM-dd hh:mm"/></div>
+                                <div class="next-row">发货时间： <fmt:formatDate value="${order.deliveryDate}"
+                                                                            pattern="yyyy-MM-dd hh:mm"/></div>
+                                <div class="next-row"></div>
+                                <div class="next-row"></div>
+                            </div>
+                            <div class="next-col grid-invoice hide">
+                                <div class="next-row gird-col-title">发票信息</div>
+                                <div class="next-row">
+                                    <div class="next-col">发票类型：</div>
+                                    <div class="next-col grid-invoice-content"></div>
+                                </div>
+                            </div>
+                            <div class="next-col grid-pay">
+                                <div class="next-row gird-col-title">金额明细</div>
+                                <div class="next-row">
+                                    商品总价：￥${order.num*order.price+order.transport-order.discount}</div>
+                                <div class="next-row"></div>
+                                <div class="next-row"></div>
+                                <div class="next-row"></div>
+                                <div class="next-row"></div>
+                                <div class="next-row"></div>
+                                <div class="next-row"></div>
+                                <div class="next-row"></div>
+                            </div>
+                        </div>
+                        <div class="order-info-buyers" style="display: none;"></div>
+                    </div>
+                    <div class="next-row order-errors" style="display: none;">
+                        <div class="next-col error-image"><img
+                                src="${ctx}/static/image/TB11puPCgmTBuNjy1XbXXaMrVXa-238-168.png">
+                        </div>
+                        <div class="next-col error-text">
+                            <div class="next-row error-msg"></div>
                         </div>
                     </div>
                 </div>
             </div>
-        </c:if>
-    </c:forEach>
+        </div>
+    </div>
+
 </div>
 <!--中间主体信息结束-->
 

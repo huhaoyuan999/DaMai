@@ -47,12 +47,17 @@
         <div class="coupon_title">我的大麦</div>
         <div class="coupon_menu">
 
-            <h2 class="coupon_menu_title">用户中心</h2>
+            <h2 class="coupon_menu_title">交易中心</h2>
             <ul class="coupon_menu_item">
 
                 <li><a href="${ctx}/order/query/${user.id}/0">订单管理</a></li>
 
+
+                    <li><a href="${ctx}/jsp/admin/accountManage.jsp">账户管理</a></li>
+
+
                 <li><a href="${ctx}/order/reduce/${user.id}">我的优惠劵</a></li>
+
             </ul>
 
             <h2 class="coupon_menu_title">账户中心</h2>
@@ -137,9 +142,11 @@
                             <select style="height: 25px;font-size: 14px;color: dimgrey;" id="showStatus"
                                     onblur="isShowStatus()">
                                 <option value="0">---请选择售票状态---</option>
-                                <option value="1" <c:if test="${tshow.showStatus==1}">selected</c:if>>预订</option>
-                                <option value="2" <c:if test="${tshow.showStatus==2}">selected</c:if>>预售</option>
+                                <option value="1" <c:if test="${tshow.showStatus==1}">selected</c:if>>项目待定</option>
+                                <option value="2" <c:if test="${tshow.showStatus==2}">selected</c:if>>预定/预售</option>
                                 <option value="3" <c:if test="${tshow.showStatus==3}">selected</c:if>>售票中</option>
+                                <option value="3" <c:if test="${tshow.showStatus==4}">selected</c:if>>退票</option>
+                                <option value="3" <c:if test="${tshow.showStatus==5}">selected</c:if>>演出开始</option>
                             </select>
                             <span style="color:red" id="showStatusError"></span></dd>
                     </dl>
@@ -166,14 +173,11 @@
                                 class="c4">*</span>活 动 图 片：
                         </dt>
                         <dd class="fl">
-                            <form method="post" action="${ctx}/order/uploadFile" class="fromImg" target="fileUpload"
+                            <form method="post" action="javascript:void(0)" class="fromImg"
                                   enctype="multipart/form-data">
-                                <input type="file" id="showImg" name="file"
+                                <input type="file" id="showImg" name="file" onchange="isShowImg()"
                                        style="height: 26px;font-size: 14px;border-radius: 5px;width: 75px;margin-top: 5px;"/>
-                                <input type="submit" id="submitGoodsImage" value="确认选择" onclick="isShowImg()"
-                                       style="color: dimgrey;background-color: #DEDEDE;display: inline-block;height: 27px;width: 90px;border: 2px solid gainsboro;border-radius: 4px;margin-top: 5px;"/>
                                 <span style="display: inline-block; width: 80px;height: 100px;margin-left: 50px;">
-                                    <iframe name="fileUpload" width="0" height="0"></iframe>
                                     <img style="display: inline-block;" src="${ctx}/static/image/${imageFile}"
                                          width="80" height="100"/>
                                 </span>

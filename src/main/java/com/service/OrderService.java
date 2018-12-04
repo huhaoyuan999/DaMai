@@ -5,6 +5,7 @@ import com.pojo.Order;
 import com.pojo.Reduce;
 import com.pojo.Tcategorie;
 import com.pojo.Tshow;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,6 +20,20 @@ public interface OrderService {
      * @return
      */
     List<Order> queryOrderInfo(Integer user_id);
+
+    /**
+     * 获取全部订单
+     *
+     * @return
+     */
+    PageInfo<Order> queryOrderAllInfo(Integer pageNo, Integer pageSize);
+
+    /**
+     * 查询指定订单
+     *
+     * @return
+     */
+    Order queryOrderIdInfo(Integer id);
 
     /**
      * 根据用户ID查询用户优惠劵
@@ -71,4 +86,15 @@ public interface OrderService {
      * @return
      */
     int updateGoodsInfo(Tshow tshow);
+
+    /**
+     * 新增订单
+     * @param order
+     * @return
+     */
+    int insertOrder(Order order);
+
+    int updateOrder(String number);
+
+    Order selectStatus(String number);
 }

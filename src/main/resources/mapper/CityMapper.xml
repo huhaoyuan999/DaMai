@@ -25,6 +25,9 @@
   <select id="selectByName" resultType="string">
     select areainfo_id from city where city_name=#{name}
   </select>
+    <select id="queryByShowName" resultType="com.pojo.City">
+      SELECT * FROM city WHERE `areainfo_id` IN (SELECT areainfo_id FROM t_show WHERE `show_name` LIKE '%${showName}%' )
+    </select>
 
 
 </mapper>

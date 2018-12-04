@@ -9,12 +9,16 @@
 <div class="dm-header-wrap">
     <div class="dm-header-box" data-spm="top">
         <a href="${pageContext.request.contextPath }/index.jsp">
-            <img class="i-logo" src="${pageContext.request.contextPath }/static/image/TB1Qim7xL5TBuNjSspmXXaDRVXa-230-104.png" alt="大麦"/>
+            <img class="i-logo"
+                 src="${pageContext.request.contextPath }/static/image/TB1Qim7xL5TBuNjSspmXXaDRVXa-230-104.png"
+                 alt="大麦"/>
         </a>
         <div class="location-header" style="display: none;">
-            <img class="i-icon-location" src="${pageContext.request.contextPath }/static/image/TB1XHDuxNGYBuNjy0FnXXX5lpXa-28-32.png"/>
+            <img class="i-icon-location"
+                 src="${pageContext.request.contextPath }/static/image/TB1XHDuxNGYBuNjy0FnXXX5lpXa-28-32.png"/>
             <span class="city-location">全国</span>
-            <img class="i-arrow-location" src="${pageContext.request.contextPath }/static/image/TB1vnUBxStYBeNjSspaXXaOOFXa-20-12.png"/>
+            <img class="i-arrow-location"
+                 src="${pageContext.request.contextPath }/static/image/TB1vnUBxStYBeNjSspaXXaOOFXa-20-12.png"/>
             <div class="city-header-wrap">
                 <div class="city-header" data-spm="city">
                     <div class="now-city">
@@ -26,7 +30,7 @@
 
                         <div class="list-other">
                             <%--<span class="name-city" data-spm="dselectcity&amp;clicktitle=全国">全国</span>--%>
-                                <span class="name-city" data-spm="0">全国</span>
+                            <span class="name-city" data-spm="0">全国</span>
                             <c:forEach items="${hotCitys}" var="obj" varStatus="index">
                                 <%--<span class="name-city" data-spm="dselectcity&amp;clicktitle=${obj.cityName}">${obj.cityName}</span>--%>
                                 <span class="name-city" data-spm="${obj.areainfoId}">${obj.cityName}</span>
@@ -47,8 +51,10 @@
         </div>
 
         <div class="recommend-header">
-            <a href="javascript:;" class="type-recommend ${selectIndex} " data-spm="dhome" data-herf="${pageContext.request.contextPath }/show/index" >首页</a>
-            <a href="javascript:;" class="type-recommend ${selectDcategory}" data-spm="dcategory" data-herf="${pageContext.request.contextPath }/city/categories">分类</a>
+            <a href="javascript:;" class="type-recommend ${selectIndex} " data-spm="dhome"
+               data-herf="${pageContext.request.contextPath }/show/index">首页</a>
+            <a href="javascript:;" class="type-recommend ${selectDcategory}" data-spm="dcategory"
+               data-herf="${pageContext.request.contextPath }/city/categories">分类</a>
             <%--<a href="${pageContext.request.contextPath }/show/index" class="type-recommend select" data-spm="dhome" >首页</a>--%>
             <%--<a href="${pageContext.request.contextPath }/city/categories" class="type-recommend" data-spm="dcategory">分类</a>--%>
         </div>
@@ -69,20 +75,31 @@
             </c:if>
             <c:if test="${!empty user}">
                 <div class="box-header user-header" onmouseenter="showInfo1()" onmouseleave="showInfo2()">
-                    <a href="javascript:void(0)" class="J_userinfo_img" data-spm="duserinfo"><img
-                            class="i-box-header i-user"
-                            src="${pageContext.request.contextPath }/static/image/TB14UKCGQyWBuNjy0FpXXassXXa-54-54.png"/></a>
+                    <a href="${ctx}/jsp/user/fileUpload.jsp" class="J_userinfo_img" data-spm="duserinfo">
+                        <c:if test="${empty user.imageName}">
+                            <img class="i-box-header i-user" src="${pageContext.request.contextPath }/static/image/TB14UKCGQyWBuNjy0FpXXassXXa-54-54.png"/>
+                        </c:if>
+                        <c:if test="${!empty user.imageName}">
+                            <img class="i-box-header i-user" src="${pageContext.request.contextPath }/static/image/${user.imageName}"/>
+                        </c:if>
+                    </a>
                     <a href="javascript:void(0)" class="J_userinfo_name" data-spm="duserinfo">
                         <div class="span-box-header name-user"></div>
                     </a>
                     <div class="login-user show">
-                        <span class="span-box-header span-user" data-spm="dlogin">${user.nickname}</span>
+                        <span class="span-box-header span-user" data-spm="dlogin"
+                              onclick="userInfoId()">${user.nickname}</span>
                     </div>
                     <div class="list-wrap">
                         <div class="list-login">
-                            <a href="${ctx}/user/modular/1" class="li-login select"
-                               data-spm="duserinfo">个人信息</a>
-                            <a href="${ctx}/user/modular/2" class="li-login" data-spm="daccountsetting">账号设置</a>
+                            <c:if test="${user.type==0}">
+                                <a href="${ctx}/user/modular/1" class="li-login select" data-spm="duserinfo">个人信息</a>
+                                <a href="${ctx}/user/modular/2" class="li-login" data-spm="daccountsetting">账号设置</a>
+                            </c:if>
+                            <c:if test="${user.type==1}">
+                                <a href="${ctx}/user/userAll/1" class="li-login select" data-spm="duserinfo">用户列表</a>
+                                <a href="${ctx}/order/goods/1" class="li-login" data-spm="daccountsetting">商品管理</a>
+                            </c:if>
                             <a href="${ctx}/order/query/${user.id}/0" class="li-login" data-spm="dordermanage">订单管理</a>
                             <a href="${ctx}/user/destroy" class="li-login" data-spm="dordermanage">退出登入</a>
                         </div>
@@ -93,7 +110,8 @@
             <div class="box-header download-header">
                 <img class="i-box-header i-download"
                      src="${pageContext.request.contextPath }/static/image/TB1A9eIGKuSBuNjy1XcXXcYjFXa-54-54.png"/>
-                <span class="span-box-header">下载</span>
+                <c:if test="${empty user}"><span class="span-box-header" onclick="registerInfoId()">注册</span></c:if>
+                <c:if test="${!empty user}"><span class="span-box-header">下载</span></c:if>
                 <div class="ewm-download">
                     <img class="i-ewm"
                          src="${pageContext.request.contextPath }/static/image/TB1r0uFxHSYBuNjSspiXXXNzpXa-280-280.png"/>
@@ -101,7 +119,7 @@
             </div>
 
             <div class="box-header">
-                <a href="#" data-spm="denglish">
+                <a href="javascript:void(0)" data-spm="denglish">
                     <img class="i-box-header"
                          src="${pageContext.request.contextPath }/static/image/TB13UKCGQyWBuNjy0FpXXassXXa-54-54.png"/>
                     <span class="span-box-header">English</span>
@@ -110,19 +128,23 @@
         </div>
 
         <div class="search-header" data-spm="searchtxt">
-            <img class="i-search" src="${pageContext.request.contextPath }/static/image/TB1qv3jxGmWBuNjy1XaXXXCbXXa-34-36.png"/>
-            <input class="input-search" placeholder="搜索明星、演出、体育赛事" data-spm="dsearchbtn"/>
+            <img class="i-search"
+                 src="${pageContext.request.contextPath }/static/image/TB1qv3jxGmWBuNjy1XaXXXCbXXa-34-36.png"/>
+            <input class="input-search" placeholder="搜索明星、演出、体育赛事" data-spm="dsearchbtn" value="${showName}"/>
             <div class="btn-search" data-spm="dsearchbtn2">搜索</div>
             <div class="list-search-wrap">
-                <div class="list-search"></div>
+                <div class="list-search">
+
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <script src="${pageContext.request.contextPath }/static/js/jquery-1.12.4.js"></script>
-<script src="${pageContext.request.contextPath }/static/js/js/head.js"></script>
+<script src="${pageContext.request.contextPath }/static/js/classification/head.js"></script>
 <script src="${pageContext.request.contextPath }/static/js/index.js"></script>
+<script src="${pageContext.request.contextPath }/static/js/classification/classifiction.js"></script>
 
 
 </body>

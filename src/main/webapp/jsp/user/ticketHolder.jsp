@@ -46,6 +46,11 @@
                 <dd><a id="nav_Order" href="${ctx}/order/query/${user.id}/0" title="订单管理"
                        domain=""><span>订单管理</span></a></dd>
 
+
+                <dd><a href="${ctx}/jsp/admin/accountManage.jsp" title="账户管理"
+                       domain=""><span>账户管理</span></a></dd>
+                <dl>
+
                 <dd><a id="nav_myCoupon" href="${ctx}/order/reduce/${user.id}" title="我的优惠券"
                        domain=""><span>我的优惠券</span></a></dd>
                 <dl>

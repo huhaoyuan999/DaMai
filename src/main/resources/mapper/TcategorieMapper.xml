@@ -19,6 +19,7 @@
             <result column="show_status" jdbcType="BIGINT" property="showStatus" />
             <result column="show_begin_time" jdbcType="TIMESTAMP" property="showBeginTime" />
             <result column="show_end_time" jdbcType="TIMESTAMP" property="showEndTime" />
+            <result column="show_ipt_num" property="showIptNum"/>
         </collection>
     </resultMap>
     <sql id="Base_Column_List">
@@ -35,6 +36,10 @@
 
 
   </select>
+    <select id="queryByShowName" resultType="com.pojo.Tcategorie">
+        SELECT * FROM `t_categorie` WHERE `categorie_id` IN (SELECT `categorie_id` FROM t_show WHERE `show_name` LIKE '%${showName}%' )
+    </select>
+
     <select id="selectById" resultType="com.pojo.Tcategorie">
         select  * from t_categorie where categorie_id=#{categorieId}
     </select>

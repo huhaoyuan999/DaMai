@@ -57,7 +57,17 @@
 
     <!--根据用户ID查询用户订单-->
     <select id="queryOrderInfo" resultMap="OrderMap">
-      SELECT * FROM t_order WHERE user_id=#{user_id}
+      SELECT * FROM t_order WHERE user_id=#{user_id} order by createDate desc
+    </select>
+
+    <!--获取全部订单-->
+    <select id="queryOrderAllInfo" resultMap="OrderMap">
+      SELECT * FROM t_order ORDER BY createDate DESC
+    </select>
+
+    <!--查询指定订单-->
+    <select id="queryOrderIdInfo" resultMap="OrderMap">
+      SELECT * FROM t_order WHERE id=#{id}
     </select>
 
     <!--根据用户ID查询用户优惠劵-->
@@ -92,8 +102,12 @@
 
     <!--商品上架-->
     <insert id="insertGoodsInfo" parameterType="com.pojo.Tshow">
-        INSERT  INTO `t_show`(`show_name`,`show_img`,`show_time`,`show_min_price`,`show_place`,`categorie_id`,`areainfo_id`,`show_title`,`show_status`,`show_begin_time`,`show_end_time`,`show_max_price`) VALUES
-        (#{showName},#{showImg},#{showTime},#{showMinPrice},#{showPlace},#{categorieId},#{areainfoId},#{showTitle},#{showStatus},#{showBeginTime},#{showEndTime},#{showMaxPrice})
+        INSERT  INTO `t_show`(`show_name`,`show_img`,`show_min_price`,`show_place`,`categorie_id`,`areainfo_id`,`show_title`,`show_status`,`show_begin_time`,`show_end_time`,`show_max_price`) VALUES
+        (#{showName},#{showImg},#{showMinPrice},#{showPlace},#{categorieId},#{areainfoId},#{showTitle},#{showStatus},#{showBeginTime},#{showEndTime},#{showMaxPrice})
+    </insert>
+    <insert id="insertOrder">
+        insert into t_order(number, mode, num, price, status, user_id, show_id, address_id, createDate, deliveryDate, address) values
+        (#{order.number}, #{order.mode}, #{order.num}, #{order.price}, #{order.status}, #{order.userId},#{order.showId}, #{order.address_id}, #{order.createDate}, #{order.deliveryDate}, #{order.address})
     </insert>
 
     <!--修改商品-->
@@ -115,5 +129,11 @@
         </trim>
         WHERE show_id=#{showId}
     </update>
+    <update id="updateOrder">
+        update t_order set status=2 where number=#{number}
+    </update>
+    <select id="selectStatus" parameterType="com.pojo.Order" resultType="com.pojo.Order">
+        select * from t_order where number=#{number}
+    </select>
 
 </mapper>

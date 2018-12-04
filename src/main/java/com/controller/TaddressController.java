@@ -48,7 +48,7 @@ public class TaddressController {
      */
     @RequestMapping("/addressList/{parentId}")
     @ResponseBody
-    public List<Tareainfo> queryAddressListInfo(@PathVariable("parentId") String parentId,Model model) {
+    public List<Tareainfo> queryAddressListInfo(@PathVariable("parentId") String parentId, Model model) {
         return taddressService.queryTareainfoList(parentId);
     }
 

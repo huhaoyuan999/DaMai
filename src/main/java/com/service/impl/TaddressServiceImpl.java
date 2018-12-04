@@ -113,10 +113,6 @@ public class TaddressServiceImpl implements TaddressService {
      */
     @Override
     public int deleteAddressId(Long addressId) {
-        int num = orderMapper.deleteAddressIdInfo(addressId);
-        if (num < 1) {
-            return 0;
-        }
         return taddressMapper.deleteAddressId(addressId);
     }
 

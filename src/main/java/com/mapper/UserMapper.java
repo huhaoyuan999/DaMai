@@ -99,6 +99,13 @@ public interface UserMapper {
     User queryUserInfo(@Param("id") int id);
 
     /**
+     * 根据账号查询
+     * @param id
+     * @return
+     */
+    User queryUser(@Param("id") String id);
+
+    /**
      * 获取用户列表
      *
      * @return

@@ -47,10 +47,14 @@
         <div class="coupon_title">我的大麦</div>
         <div class="coupon_menu">
 
-            <h2 class="coupon_menu_title">用户中心</h2>
+            <h2 class="coupon_menu_title">交易中心</h2>
             <ul class="coupon_menu_item">
 
                 <li><a href="${ctx}/order/query/${user.id}/0">订单管理</a></li>
+
+
+                    <li><a href="${ctx}/jsp/admin/accountManage.jsp">账户管理</a></li>
+
 
                 <li><a href="${ctx}/order/reduce/${user.id}">我的优惠劵</a></li>
             </ul>
@@ -116,12 +120,14 @@
                                     <td style="height: 60px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">
                                         <img src="${pageContext.request.contextPath }/static/image/${goods.showImg}"
                                              width="40" height="50" style="margin-top: 5px;"></td>
-                                    <td style="height: 60px;line-height: 60px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">${goods.showTime}</td>
+                                    <td style="height: 60px;line-height: 60px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;"><fmt:formatDate value="${goods.showBeginTime}" pattern="yyyy.MM.dd"/>-<fmt:formatDate value="${goods.showEndTime}" pattern="yyyy.MM.dd"/></td>
                                     <td style="height: 60px;line-height: 60px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">${goods.tareainfo.areainfoName}</td>
                                     <td style="height: 60px;line-height: 60px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">
-                                        <c:if test="${goods.showStatus==1}">预定</c:if>
-                                        <c:if test="${goods.showStatus==2}">预售</c:if>
+                                        <c:if test="${goods.showStatus==1}">项目待定</c:if>
+                                        <c:if test="${goods.showStatus==2}">预定/预售</c:if>
                                         <c:if test="${goods.showStatus==3}">售票中</c:if>
+                                        <c:if test="${goods.showStatus==4}">退票</c:if>
+                                        <c:if test="${goods.showStatus==5}">演出开始</c:if>
                                     </td>
                                     <td style="height: 60px;line-height: 60px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">
                                         <a href="${ctx}/order/queryGoods/${goods.showId}">修改</a>&nbsp;&nbsp;

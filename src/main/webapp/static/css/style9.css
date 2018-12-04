@@ -1,0 +1,15 @@
+.order {
+	margin-right: 56px;
+	margin-left: 32px;
+}
+
+#img {
+	width: 35px;
+	height: 30px;
+	margin-bottom: -5px;
+}
+
+#order {
+	background-color: #FFCC66;
+	width: 929px;
+}

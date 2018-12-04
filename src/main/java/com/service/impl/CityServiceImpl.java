@@ -20,6 +20,11 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
+    public List<City> queryByShowName(String showName) {
+        return cityMapper.queryByShowName(showName);
+    }
+
+    @Override
     public List<City> queryHotCityInfo() {
         return cityMapper.queryHotCityInfo();
     }

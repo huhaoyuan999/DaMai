@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <title>大麦网-底部部分</title>
 </head>
-<link rel="stylesheet" href="/statics/css/index.css">
+<link rel="stylesheet" href="/static/css/index.css">
 <body>
 <!--底部-->
 <div class="dm-footer">

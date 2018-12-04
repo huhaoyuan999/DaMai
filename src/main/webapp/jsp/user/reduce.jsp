@@ -42,10 +42,13 @@
         <div class="coupon_title">我的大麦</div>
         <div class="coupon_menu">
 
-            <h2 class="coupon_menu_title">用户中心</h2>
+            <h2 class="coupon_menu_title">交易中心</h2>
             <ul class="coupon_menu_item">
 
                 <li><a href="${ctx}/order/query/${user.id}/0">订单管理</a></li>
+
+
+                    <li><a href="${ctx}/jsp/admin/accountManage.jsp">账户管理</a></li>
 
                 <li><a href="${ctx}/order/reduce/${user.id}">我的优惠劵</a></li>
             </ul>

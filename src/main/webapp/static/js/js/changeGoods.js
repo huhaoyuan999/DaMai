@@ -97,10 +97,11 @@ function isShowStatus() {
 function isShowImg() {
     //获取图片
     var showImg = $("#showImg").val();
+    //验证图片格式正则表达式
+    var testImg = /^(([a-zA-Z]:)|(\\{2}\w+)\$?)(\\(\w[\w].*))(.JPEG|.jpeg|.JPG|.jpg|.GIF|.gif)$/;
 
-    if (showImg.length == 0) {
-        $("#showImgError").text("请 选 择 图 片");
-        $(".fromImg").attr("action", "javascript:void(0)");
+    if (!testImg.test(showImg)) {
+        $("#showImgError").text("图 片 格 式 不 正 确");
     } else {
         var result = showImg.split('\\');
         var tshow = {
@@ -109,8 +110,25 @@ function isShowImg() {
         }
         $("#showImgError").text("");
         $("#activityPicture").val(result[result.length - 1]);
-        $(".fromImg").attr("action", "/damai/order/uploadFile");
-        $(".fromImg").load('/damai/order/imageReplace .fromImg>*', tshow);
+
+        //获取form表单
+        var formData = new FormData($(".fromImg")[0]);
+        //获取form表单里的文件值
+        formData.append('file', $('#showImg')[0].files[0]);
+        $.ajax({
+            url: "/damai/order/uploadFile",
+            method: "post",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (data == true) {
+                    $(".fromImg").load('/damai/order/imageReplace .fromImg>*', tshow);
+                } else {
+                    alert("图片上传失败");
+                }
+            }
+        });
     }
 }
 
@@ -162,6 +180,8 @@ function changeAddUpdateGoods() {
     var activityPicture = $("#activityPicture").val();
     if (activityPicture.length == 0) {
         $("#showImgError").text("请 选 择 图 片");
+    }else{
+        $("#showImgError").text("");
     }
     //获取最低票价
     var showMinPrice = $("#showMinPrice").val();

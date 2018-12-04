@@ -124,6 +124,7 @@ function hideInfo() {
 
 function showInfo(id) {
     $("#orderId").val(id);
+    $("#orderId2").val(id);
     $("#notify-window").show();
 }
 
@@ -133,15 +134,21 @@ function showInfo(id) {
 function deleteOrderInfo() {
     $("#notify-window").hide();
     var id = $("#orderId").val();
+    if (id == undefined) {
+        id = $("#orderId2").val();
+    }
     $.post("/damai/order/delete/" + id + "", deleteOrder);
 
     function deleteOrder(data) {
         if (data == 1) {
             $("#deleteOrder" + id + "").remove();
+            window.location.reload();
         } else {
             alert("删除失败");
         }
     }
 }
 
-
+function orderPage(pageNo) {
+    $(".order-list-wrapper").load("/damai/order/queryPage/" + pageNo + "  .order-list-wrapper>*");
+}

@@ -90,6 +90,19 @@ public class Tshow implements Serializable {
 
     private String showTime;
 
+    /**
+     * 票数
+     */
+    private Integer showIptNum;
+
+    public Integer getShowIptNum() {
+        return showIptNum;
+    }
+
+    public void setShowIptNum(Integer showIptNum) {
+        this.showIptNum = showIptNum;
+    }
+
     public String getShowTime() {
         return showTime;
     }

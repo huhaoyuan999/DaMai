@@ -6,7 +6,7 @@ $("a[data-city='ci']").on('click',function () {
     }
      var categorieId=$(".active").eq(1).attr("data-categorieId")
     var showTime=$(".active").eq(2).attr('data-val')
-    var mode=$(".search_lis_on").attr("mode-mode-id")
+    var mode=$(".search_icon_on").attr("mode-mode-id")
     var pai=$(".active").eq(3).attr("data-pai-val")
     var pageNum=1
     $("a[data-city='ci']").removeClass()
@@ -21,7 +21,7 @@ $("a[data-categorie='categorie']").on('click',function () {
     var city=$(".active").eq(0).text()
     var categorieId= $(this).attr("data-categorieId");
     var showTime=$(".active").eq(2).attr('data-val')
-    var mode=$(".search_lis_on").attr("mode-mode-id")
+    var mode=$(".search_icon_on").attr("mode-mode-id")
     var pai=$(".active").eq(3).attr("data-pai-val")
     var pageNum=1
     $("a[data-categorie='categorie']").removeClass()
@@ -34,7 +34,7 @@ $("a[data-date='selectDate']").on('click',function () {
     var city=$(".active").eq(0).text()
     var categorieId=$(".active").eq(1).attr("data-categorieId")
     var showTime=$(this).attr('data-val')
-    var mode=$(".search_lis_on").attr("mode-mode-id")
+    var mode=$(".search_icon_on").attr("mode-mode-id")
     var pai=$(".active").eq(3).attr("data-pai-val")
     var pageNum=1
     $("a[data-date='selectDate']").removeClass()
@@ -51,8 +51,16 @@ $("a[data-mode='mode']").on('click',function () {
     var pai=$(".active").eq(3).attr("data-pai-val")
     var pageNum=1
     $("a[data-mode='mode']").removeClass()
-    $(this).siblings("a").addClass("search_icon")
-    $(this).addClass("search_lis_on")
+    if(mode==0){
+        $(this).siblings("a").addClass("search_icon")
+        $(this).addClass("search_lis_on")
+
+    }else{
+        $(this).siblings("a").addClass("search_lis")
+        $(this).addClass("search_icon_on")
+    }
+
+
     query(city,categorieId,showTime,mode,pai,pageNum)
 })
 
@@ -60,7 +68,8 @@ $("a[data-pai='pai']").on('click',function () {
     var city=$(".active").eq(0).text()
     var categorieId=$(".active").eq(1).attr("data-categorieId")
     var showTime=$(".active").eq(2).attr('data-val')
-    var mode=$(".search_lis_on").attr("mode-mode-id")
+    var mode=$(".search_icon_on").attr("mode-mode-id")
+
     var pai=$(this).attr("data-pai-val")
     var pageNum=1
     $("a[data-pai='pai']").removeClass()
@@ -68,26 +77,29 @@ $("a[data-pai='pai']").on('click',function () {
     query(city,categorieId,showTime,mode,pai,pageNum)
 })
 $("a[data-page]").on('click',function () {
-    alert("aa")
+    var city=$(".active").eq(0).text()
+    var categorieId=$(".active").eq(1).attr("data-categorieId")
+    var showTime=$(".active").eq(2).attr('data-val')
+    var mode=$(".search_icon_on").attr("mode-mode-id")
+    var pai=$(".active").eq(3).attr("data-pai-val")
+    var pageNum=$("#pageNum").attr("data-pageNum")
+    query(city,categorieId,showTime,mode,pai,pageNum)
+})
+function pageAjax(pageNum) {
     var city=$(".active").eq(0).text()
     var categorieId=$(".active").eq(1).attr("data-categorieId")
     var showTime=$(".active").eq(2).attr('data-val')
     var mode=$(".search_lis_on").attr("mode-mode-id")
     var pai=$(".active").eq(3).attr("data-pai-val")
-    var pageNum=$("#pageNum").attr("data-pageNum")
-    var pageNo=$(this).attr("data-page")
     query(city,categorieId,showTime,mode,pai,pageNum)
-})
+
+}
 
 
 function setLoading(i){
     if(i==0){
-        //$('#search_loading').hide();
-        //$('#search_loading').stop();
         $('#search_loading').slideUp();
     }else{
-        //$('#search_loading').show();
-        //$('#search_loading').stop();
         $('#search_loading').slideDown();
     }
 
@@ -110,8 +122,7 @@ function query(city,categorieId,showTime,mode,pai,pageNum) {
             return t;
         }
     }
-
-
+    var showName = $(".input-search").val()
     var showBeginTime;
     switch (showTime) {
         case 0:
@@ -135,16 +146,23 @@ function query(city,categorieId,showTime,mode,pai,pageNum) {
     }
 
 
+
     var item = {
         'name':city,
         'categorieId':categorieId,
         'showBeginTime':showBeginTime,
         'mode':mode,
         'pai':pai,
-        'pageNum':pageNum
+        'pageNum':pageNum,
+        "showName":showName
     };
     $("#content_list").load('/damai/show/query #content_list>*',item,function () {
         setLoading(0)
+        var total= $(".page-total").html();
+        $("#navigation_show").html(total);
+        var da= $(".page-num").html()
+        $(".search_sort_num").html(da)
+
     });
 }
 

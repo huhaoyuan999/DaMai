@@ -45,50 +45,56 @@
                 <dd><a id="nav_Order" href="${ctx}/order/query/${user.id}/0" title="订单管理"
                        domain=""><span>订单管理</span></a></dd>
 
-                <dd><a id="nav_myCoupon" href="${ctx}/order/reduce/${user.id}" title="我的优惠券"
-                       domain=""><span>我的优惠券</span></a></dd>
+
+                <dd><a href="${ctx}/jsp/admin/accountManage.jsp" title="账户管理"
+                       domain=""><span>账户管理</span></a></dd>
                 <dl>
 
-                    <dt>账户中心</dt>
 
-                    <c:if test="${user.type==0}">
-                        <dd><a id="nav_MyAddress" href="${ctx}/address/userAddress/${user.id}" title="收货地址"
-                               domain="" class="on"><span>收货地址</span></a></dd>
-                    </c:if>
+                    <dd><a id="nav_myCoupon" href="${ctx}/order/reduce/${user.id}" title="我的优惠券"
+                           domain=""><span>我的优惠券</span></a></dd>
+                    <dl>
 
-                    <dd><a href="${ctx}/user/modular/2"
-                           title="账号设置" domain=""><span>账号设置</span></a></dd>
+                        <dt>账户中心</dt>
 
-                    <dd><a href="${ctx}/user/modular/1" title="个人信息" domain=""><span>个人信息</span></a></dd>
+                        <c:if test="${user.type==0}">
+                            <dd><a id="nav_MyAddress" href="${ctx}/address/userAddress/${user.id}" title="收货地址"
+                                   domain="" class="on"><span>收货地址</span></a></dd>
+                        </c:if>
 
-                    <c:if test="${user.type==0}">
-                        <dd><a id="nav_MyInfo2" href="${ctx}/user/ticketHolder/${user.id}"
-                               title="常用购票人" domain=""><span>常用购票人</span></a></dd>
-                    </c:if>
+                        <dd><a href="${ctx}/user/modular/2"
+                               title="账号设置" domain=""><span>账号设置</span></a></dd>
 
-                    <c:if test="${user.type==1}">
-                        <dd><a href="${ctx}/user/userAll/1"
-                               title="用户列表" domain=""><span>用户列表</span></a></dd>
+                        <dd><a href="${ctx}/user/modular/1" title="个人信息" domain=""><span>个人信息</span></a></dd>
 
-                        <dt>商品管理</dt>
+                        <c:if test="${user.type==0}">
+                            <dd><a id="nav_MyInfo2" href="${ctx}/user/ticketHolder/${user.id}"
+                                   title="常用购票人" domain=""><span>常用购票人</span></a></dd>
+                        </c:if>
 
-                        <dd><a href="${ctx}/order/goods/1"
-                               title="商品管理" domain=""><span>商品管理</span></a></dd>
+                        <c:if test="${user.type==1}">
+                            <dd><a href="${ctx}/user/userAll/1"
+                                   title="用户列表" domain=""><span>用户列表</span></a></dd>
 
-                        <dd><a href="${ctx}/order/changeGoods"
-                               title="商品上架" domain=""><span>商品上架</span></a></dd>
-                    </c:if>
+                            <dt>商品管理</dt>
+
+                            <dd><a href="${ctx}/order/goods/1"
+                                   title="商品管理" domain=""><span>商品管理</span></a></dd>
+
+                            <dd><a href="${ctx}/order/changeGoods"
+                                   title="商品上架" domain=""><span>商品上架</span></a></dd>
+                        </c:if>
+                    </dl>
+
+                    <script type="text/javascript">
+                        (function () {
+                            document.getElementById('mydamai').style.display = 'none';
+                            var object = document.getElementById('nav_' + currNavName);
+                            if (object) object.className += 'on';
+                            document.getElementById('mydamai').style.display = '';
+                        })();
+                    </script>
                 </dl>
-
-                <script type="text/javascript">
-                    (function () {
-                        document.getElementById('mydamai').style.display = 'none';
-                        var object = document.getElementById('nav_' + currNavName);
-                        if (object) object.className += 'on';
-                        document.getElementById('mydamai').style.display = '';
-                    })();
-                </script>
-            </dl>
         </div>
     </div>
     <!--left of end(左侧边导航栏)-->
@@ -145,10 +151,6 @@
                             <select class="sel-4" name="citySelect" id="citySelect"
                                     onchange="getSubCountryInsert2(this.value);">
                                 <option value="0">--请选择--</option>
-                                <c:forEach var="province" items="${addressCollection}">
-                                    varStatus="index1">
-                                    <option value="${province.areainfoId}">${province.areainfoName}</option>
-                                </c:forEach>
                             </select>&nbsp;市&nbsp;
                             <select class="sel-4" name="countrySelect" id="countrySelect">
                                 <option value="0">--请选择--</option>
@@ -259,25 +261,11 @@
                                                                               id="McitySelect${indexs.index}"
                                                                               onchange="getMSubCountry(this.value,${indexs.index});"
                                                                               name="">
-                                                    <c:forEach var="city" items="${addressCollection}"
-                                                               varStatus="index1">
-                                                        <c:if test="${city.parentId==address.provinceName.areainfoId}">
-                                                            <option value="${city.areainfoId}"
-                                                                    <c:if test="${city.areainfoId==address.cityName.areainfoId}">selected</c:if>
-                                                            >${city.areainfoName}</option>
-                                                        </c:if>
-                                                    </c:forEach>
+                                                    <option value="${address.cityName.areainfoId}">${address.cityName.areainfoName}</option>
                                                 </select>&nbsp;市&nbsp;
                                                     <select class="sel-4" id="McitySe${indexs.index}" name=""
                                                             onchange="getMSubStreet(this.value,88265647);">
-                                                        <c:forEach var="area" items="${addressCollection}"
-                                                                   varStatus="index1">
-                                                            <c:if test="${area.parentId==address.cityName.areainfoId}">
-                                                                <option value="${area.areainfoId}"
-                                                                        <c:if test="${area.areainfoId==address.areaName.areainfoId}">selected</c:if>
-                                                                >${area.areainfoName}</option>
-                                                            </c:if>
-                                                        </c:forEach>
+                                                        <option value="${address.areaName.areainfoId}">${address.areaName.areainfoName}</option>
                                                     </select>&nbsp;区
                                                 </p>
                                                 <p class="mt15"><input type="text" id="detailed${indexs.index}"
@@ -377,25 +365,11 @@
                                                                                   id="McitySelect${indexs.index}"
                                                                                   onchange="getMSubCountry(this.value,${indexs.index});"
                                                                                   name="">
-                                                    <c:forEach var="city" items="${addressCollection}"
-                                                               varStatus="index1">
-                                                        <c:if test="${city.parentId==address.provinceName.areainfoId}">
-                                                            <option value="${city.areainfoId}"
-                                                                    <c:if test="${city.areainfoId==address.cityName.areainfoId}">selected</c:if>
-                                                            >${city.areainfoName}</option>
-                                                        </c:if>
-                                                    </c:forEach>
+                                                    <option value="${address.cityName.areainfoId}">${address.cityName.areainfoName}</option>
                                                 </select>&nbsp;市&nbsp;
                                                     <select class="sel-4" id="McitySe${indexs.index}" name=""
                                                             onchange="getMSubStreet(this.value,88294702);">
-                                                        <c:forEach var="area" items="${addressCollection}"
-                                                                   varStatus="index1">
-                                                            <c:if test="${area.parentId==address.cityName.areainfoId}">
-                                                                <option value="${area.areainfoId}"
-                                                                        <c:if test="${area.areainfoId==address.areaName.areainfoId}">selected</c:if>
-                                                                >${area.areainfoName}</option>
-                                                            </c:if>
-                                                        </c:forEach>
+                                                        <option value="${address.areaName.areainfoId}">${address.areaName.areainfoName}</option>
                                                     </select>&nbsp;区
                                                 </p>
                                                 <p class="mt15"><input type="text" id="detailed${indexs.index}"

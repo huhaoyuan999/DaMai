@@ -52,9 +52,17 @@ public class UserServiceImpl implements UserService {
             return 0;
         } else {
             user.setPassword(SecurityUtils.md5Hex(user.getPassword()));
-            System.out.println("你好");
             return userMapper.insertInfo(user);
         }
+    }
+
+    /**
+     * 用户注册
+     * @param user
+     * @return
+     */
+    public int insertUser(User user){
+        return userMapper.insertInfo(user);
     }
 
     /**
@@ -185,6 +193,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public int deleteUserInfo(Integer id) {
         return userMapper.deleteUserInfo(id);
+    }
+
+    @Override
+    public User queryUserList(String id) {
+        return userMapper.queryUser(id);
     }
 
 }

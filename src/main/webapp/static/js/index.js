@@ -19,13 +19,26 @@ $(".category__list").click(function () {
     var areainfoName = $('.now-city').children(".select-city").text();
     window.location.href = "/damai/show/query?categorieId=" + categorieId + "&name=" + areainfoName
 });
-$(".head-more").on('click',function () {
+$(".head-more").on('click', function () {
 
 });
+
 function qy(categorieId) {
     //获取当前城市名称
     var areainfoName = $('.now-city').children(".select-city").text();
-
     window.location.href = "/damai/show/query?categorieId=" + categorieId + "&name=" + areainfoName
 }
 
+function userInfoId() {
+    window.location.href = "/damai/user/modular/1";
+}
+
+function registerInfoId() {
+    window.location.href = "/damai/jsp/user/register.jsp";
+}
+
+function closeAdverse() {
+    // $(".adverse").slideDown(500);
+    $(".adverse").slideUp(500);
+    // $(".adverse").hide();
+}

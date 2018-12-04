@@ -2,6 +2,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -15,7 +16,6 @@
           type="image/x-icon">
     <link href="${ctx}/static/cssGoods/index.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/static/cssGoods/ui.css" rel="stylesheet" type="text/css"/>
-    <link href="${ctx}/static/layui/css/layui.css" rel="stylesheet" type="text/css"  media="all"/>
 
 
 </head>
@@ -25,82 +25,65 @@
 <!--页面头部 start-->
 <jsp:include page="/jsp/comm/head.jsp"/>
 <div class="wrapper">
-    <script type="text/javascript">var cityId = 0;</script>
-    <form name="searchForm" action="#" method="post">
-        <input type="hidden" name="keyword" id="keyword" value="">
-        <input type="hidden" name="currPage" id="currPage" value="1">
-        <input type="hidden" id="tsg" value="0">
-        <input type="hidden" id="sttime" value="">
-        <input type="hidden" id="ettime" value="">
-        <input type="hidden" id="degrade" value="">
-        <input type="hidden" id="cityId" value="">
-        <input type="hidden" id="ptype" value="">
-        <input type="hidden" id="simp_key" value="">
-        <input type="hidden" id="curr_order" value="1">
-        <input type="hidden" id="city_name" value="">
-        <input type="hidden" id="destCity" value="">
-        <input type="hidden" id="category_name" value="">
-        <input type="hidden" id="tag_names" value="">
-        <input type="hidden" id="subcategory_name" value="">
-        <input type="hidden" id="isSingleChar" value="">
-        <input type="hidden" id="projectids"
-               value="166939,166028,166083,166606,166715,165821,165799,165802,166479,166704,165383,165989,165763,163895,162901,166927,164170,163603,163506,162877,165847,165672,160502,161976,164298,166681,166968,167011,165951,162119,164917,166641,163531,166081,166084,166195,166805,164784,166920,165874,165396,166830,165807,166800,166754,166946,164259,166970,166040,78089,139556,166742,166187,165828,152109,166786,166925,166954,166921,166124">
-        <input type="hidden" id="listmodle" value="">
-    </form>
+
 
     <!--内容 start-->
     <!--如果搜索无结果 有关键字的 begin-->
-    <div class="search-none-keywords" style="display:none">
-        <div class="search-result">
-            <p>哎呀！麦麦没有找到与“<span class="cf"></span>
-                ”相关的商品</p>
-        </div>
-        <div class="clearfix change-box">
-            <div class="change-left">
-                <!--明星周边 begin-->
-                <div id="artist_around_bottom"></div>
-                <!--明星周边 end-->
-                <!--猜您喜欢 begin-->
-                <div class="guess_you_likemore"></div>
-                <!--猜您喜欢 end-->
-            </div>
-            <div class="search_right">
-                <!-- 艺人场馆展位 -->
-                <div class="search_right_head"></div>
-            </div>
-        </div>
-        <!--如果搜索有结果 end-->
-    </div>
+    <%--<div class="search-none-keywords" style="display:none">--%>
+        <%--<div class="search-result">--%>
+            <%--<p>哎呀！麦麦没有找到与“<span class="cf"></span>--%>
+                <%--”相关的商品</p>--%>
+        <%--</div>--%>
+        <%--<div class="clearfix change-box">--%>
+            <%--<div class="change-left">--%>
+                <%--<!--明星周边 begin-->--%>
+                <%--<div id="artist_around_bottom"></div>--%>
+                <%--<!--明星周边 end-->--%>
+                <%--<!--猜您喜欢 begin-->--%>
+                <%--<div class="guess_you_likemore"></div>--%>
+                <%--<!--猜您喜欢 end-->--%>
+            <%--</div>--%>
+            <%--<div class="search_right">--%>
+                <%--<!-- 艺人场馆展位 -->--%>
+                <%--<div class="search_right_head"></div>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+        <%--<!--如果搜索有结果 end-->--%>
+    <%--</div>--%>
 
     <!--如果没有结果 有关键字的 end-->
     <!--如果搜索无结果 无关键字的 begin-->
-    <div class="search-none" style="display:none">
-        <div class="search-result">
-            <p>哎呀！麦麦没有找到该筛选条件下相关的商品</p>
-        </div>
-        <div class="clearfix change-box">
-            <div class="change-left">
-                <!--明星周边 begin-->
-                <div id="artist_around_bottom"></div>
-                <!--明星周边 end-->
-                <!--猜您喜欢 begin-->
-                <div class="guess_you_likemore"></div>
-                <!--猜您喜欢 end-->
-            </div>
-            <div class="search_right">
-                <!-- 艺人场馆展位 -->
-                <div class="search_right_head"></div>
-            </div>
-        </div>
-        <!--如果搜索有结果 end-->
-    </div>
+    <%--<div class="search-none" style="display:none">--%>
+        <%--<div class="search-result">--%>
+            <%--<p>哎呀！麦麦没有找到该筛选条件下相关的商品</p>--%>
+        <%--</div>--%>
+        <%--<div class="clearfix change-box">--%>
+            <%--<div class="change-left">--%>
+                <%--<!--明星周边 begin-->--%>
+                <%--<div id="artist_around_bottom"></div>--%>
+                <%--<!--明星周边 end-->--%>
+                <%--<!--猜您喜欢 begin-->--%>
+                <%--<div class="guess_you_likemore"></div>--%>
+                <%--<!--猜您喜欢 end-->--%>
+            <%--</div>--%>
+            <%--<div class="search_right">--%>
+                <%--<!-- 艺人场馆展位 -->--%>
+                <%--<div class="search_right_head"></div>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+        <%--<!--如果搜索有结果 end-->--%>
+    <%--</div>--%>
 
     <!--如果没有结果 无关键字的 end-->
     <!--搜索有结果 start -->
     <!--如果搜索有结果 begin-->
     <div class="search_new clearfix">
         <div class="search_top">
-            <p id="navigation_show">共<span class="cf">${pageInfo.total}</span>个商品</p>
+            <p id="navigation_show">
+                <c:if test="${showName!=null and showName!=''}">
+                    搜索<em>“</em><span class="cf" title="${showName}"> ${showName} </span><em>”</em>,
+                </c:if>
+                共<span class="cf">${pageInfo.total}</span>个商品</p>
         </div>
         <div id="pageNum" data-pageNum="${pageInfo.pageNum}" style="display: none">
         </div>
@@ -113,10 +96,20 @@
                 <!-- 条件筛选 start -->
                 <div class="search_city">
                     <!-- 加载城市 start  -->
-                    <a class="search_city_more" href="javascript:void(0);" style="display: block;">
-                        <span class="search_city_up" onclick="citylinecontrolg(0)">更多</span>
-                        <span class="search_city_off" style="display:none;" onclick="citylinecontrolg(1)">收起</span>
-                    </a>
+                    <c:choose>
+                        <c:when test="${cityList.size()<=10}">
+                            <a class="search_city_more" href="javascript:void(0);" style="display:none;">
+                                <span class="search_city_up" onclick="citylinecontrolg(0)">更多</span>
+                                <span class="search_city_off" style="display:none;" onclick="citylinecontrolg(1)">收起</span>
+                            </a>
+                        </c:when>
+                        <c:otherwise>
+                            <a class="search_city_more" href="javascript:void(0);" style="display:block;">
+                                <span class="search_city_up" onclick="citylinecontrolg(0)">更多</span>
+                                <span class="search_city_off" style="display:none;" onclick="citylinecontrolg(1)">收起</span>
+                            </a>
+                        </c:otherwise>
+                    </c:choose>
                     <dl class="search_city_line" id="search_city_line">
                         <dt>城　市：</dt>
                         <dd>
@@ -131,7 +124,12 @@
                             </c:choose>
                         </dd>
                         <dd class="search_city_num" id="search_city_num_tj">
-                            <ul class="search_city_all clear">
+
+                            <ul class="search_city_all clear"
+                                    <c:if test="${cityList.size()<=10}">
+                                        style="height: 25px"
+                                    </c:if>
+                            >
                                 <c:forEach items="${cityList}" var="obj" varStatus="index">
                                     <c:choose>
                                         <c:when test="${areainfoId == obj.areainfoId }">
@@ -152,7 +150,7 @@
                         <dt>分　类：</dt>
                         <dd>
                             <c:choose>
-                                <c:when test="${categorieId==0}">
+                                <c:when test="${categorieId==0 ||categorieId==null}">
                                     <a href="javascript:void(0)" data-categorie="categorie" data-categorieId="0"   class="active">全部</a>
                                 </c:when>
                                 <c:otherwise>
@@ -217,9 +215,26 @@
                                 <a title="列表模式" href="javascript:void(0)" data-mode="mode" mode-mode-id="0" class="search_lis_on"></a>
                                 <a title="大图模式" href="javascript:void(0)" data-mode="mode" class="search_icon" mode-mode-id="1"></a>
                             </div>
-                            <div class="search_sort_num"><a href="javascript:void(0)" class="search_sort_prev_gray"></a>
-                                <p class="search_sort_txt"><span>1</span>/<span>67</span></p>
-                                <a class="search_sort_next" href="javascript:void(0)" onclick="pagesAjax(2)"></a>
+                            <div class="search_sort_num">
+                                <c:choose>
+                                    <c:when test="${pageInfo.pageNum==1}">
+                                        <a href="javascript:void(0)" class="search_sort_prev_gray"></a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="javascript:void(0)" class="search_sort_prev" onclick="pageAjax(${pageInfo.prePage})"></a>
+                                    </c:otherwise>
+                                </c:choose>
+
+                                <p class="search_sort_txt"><span>${pageInfo.pageNum}</span>/<span>${pageInfo.pages}</span></p>
+                                <c:choose>
+                                    <c:when test="${pageInfo.pageNum==pageInfo.pages}">
+                                        <a class="search_sort_next_gray" href="javascript:void(0)"></a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a class="search_sort_next" href="javascript:void(0)" onclick="pageAjax(${pageInfo.nextPage})"></a>
+                                    </c:otherwise>
+                                </c:choose>
+
                             </div>
                         </div>
                         <ul class="search_sort_way">
@@ -246,100 +261,163 @@
                     </ul>
                     <!-- 搜索列表 start -->
                     <ul class="search_list search_pic_list" id="content_list">
-                        <c:forEach items="${pageInfo.list}" var="obj" varStatus="index">
-                            <li>
-                                <div class="search_img">
-                                    <a id="search_log_${obj.showImg}" href="javascript:void(0);" data-spm="ditem_0" target="_blank" title="${obj.showName}">
-                                        <img src="${ctx}/static/image/${obj.showImg}" alt="" width="115" height="155"/>
-                                    </a>
-                                </div>
-                                <div class="search_txt"><h3><a id="search_log_166939" href="javascript:void(0);" target="_blank">${obj.showName}</a></h3>
-                                    <p class="search_txt_cut c3">${obj.showTitle}</p>
-                                    <p class="search_txt_time c3"><a href="javascript:void(0);" class="search_txt_time_icon"></a><fmt:formatDate value="${obj.showBeginTime}" pattern="yyyy.MM.dd"/>
-                                        -<fmt:formatDate value="${obj.showEndTime}" pattern="yyyy.MM.dd"/></p>
-                                    <p class="c1"><span class="c3 search_txt_site_icon">${obj.showPlace}</span></p>
-                                    <p class="search_txt_piao">
-                                        <c:choose>
-                                            <c:when test="${obj.showMaxPrice == null || obj.showMaxPrice == ''}">
-                                                <em>${obj.showMinPrice}元</em>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <em>${obj.showMinPrice}-${obj.showMaxPrice}元</em>
-                                            </c:otherwise>
-                                        </c:choose>
-                                        <c:if test="${obj.showStatus eq 1}">
-                                            预订
-                                        </c:if>
-                                        <c:if test="${obj.showStatus eq 2}">
-                                            预售
-                                        </c:if>
-                                        <c:if test="${obj.showStatus eq 3}">
-                                            售票中
-                                        </c:if>
-                                    </p>
-                                </div>
-                            </li>
+                        <li style="display: none;">
+                            <div class="page-total">
+                                <c:if test="${showName!=''}">
+                                    搜索<em>“</em><span class="cf" title="${showName}"> ${showName} </span><em>”</em>,
+                                </c:if>
+                                共<span class="cf">${pageInfo.total}</span>个商品
+                            </div>
+                            <div class="page-num">
+                                <c:choose>
+                                    <c:when test="${pageInfo.pageNum==1}">
+                                        <a href="javascript:void(0)" class="search_sort_prev_gray"></a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="javascript:void(0)" class="search_sort_prev" onclick="pageAjax(${pageInfo.prePage})"></a>
+                                    </c:otherwise>
+                                </c:choose>
 
-                        </c:forEach>
-                        <li id="search_list_page_tj" class="search_list_page">
-                            <div class="search-page-box">
-                                <ul class="search-page-list">
-                                    <%--<ul class="search-page-num">--%>
+                                <p class="search_sort_txt"><span>${pageInfo.pageNum}</span>/<span>${pageInfo.pages}</span></p>
+                                <c:choose>
+                                    <c:when test="${pageInfo.pageNum==pageInfo.pages}">
+                                        <a class="search_sort_next_gray" href="javascript:void(0)"></a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a class="search_sort_next" href="javascript:void(0)" onclick="pageAjax(${pageInfo.nextPage})"></a>
+                                    </c:otherwise>
+                                </c:choose>
 
-                                        <%--<c:forEach var="ind" begin="1" end="${pageInfo.pages}" step="1">--%>
-                                            <%--<c:if test="${ind>=1 and ind<5}">--%>
-                                                <%--<li class="search-page-act" onclick="pageAjax(${ind})">${ind}</li>--%>
-                                            <%--</c:if>--%>
-                                            <%--<c:if test="${ind==5}">--%>
-                                                <%--<li pagen="morePage" class="search-page-more">...</li>--%>
-                                            <%--</c:if>--%>
-
-                                            <%--<c:if test="${ind>5}">--%>
-                                                <%--<li class="search-page-act" onclick="pageAjax(${ind})">${ind}</li>--%>
-                                            <%--</c:if>--%>
-                                            <%--<c:if test="${pageInfo.pages-index<5}">--%>
-                                                <%--<li pagen="morePage" class="search-page-more">...</li>--%>
-                                            <%--</c:if>--%>
-                                            <%--<c:if test="${ind==pageInfo.pages}">--%>
-                                                <%--<li onclick="pageAjax(${pageInfo.pages})">${pageInfo.pages}</li>--%>
-                                            <%--</c:if>--%>
-
-                                        <%--</c:forEach>--%>
-                                        <%--<c:if test="${pageInfo.pageNum==1}">--%>
-                                            <%--<li class="search-pagePrev gray" onclick="pageAjax(${pageInfo.prePage})">&lt; 上一页</li>--%>
-                                            <%--<li class="search-page-act" onclick="pageAjax(${1})">1</li>--%>
-                                            <%--<li  onclick="pageAjax(${pageInfo.pageNum+1})">${pageInfo.pageNum+1}</li>--%>
-                                            <%--<li  onclick="pageAjax(${pageInfo.pageNum+2})">${pageInfo.pageNum+2}</li>--%>
-                                            <%--<li  onclick="pageAjax(${pageInfo.pageNum+3})">${pageInfo.pageNum+3}</li>--%>
-                                            <%--<li  onclick="pageAjax(${pageInfo.pageNum+4})">${pageInfo.pageNum+4}</li>--%>
-                                            <%--<li  onclick="pageAjax(${pageInfo.pageNum+5})">${pageInfo.pageNum+5}</li>--%>
-                                            <%--<li pagen="morePage" class="search-page-more">...</li>--%>
-                                            <%--<li  onclick="pageAjax(${pageInfo.pages})">${pageInfo.pages}</li>--%>
-                                            <%--<li class="search-pageNext" onclick="pageAjax(${pageInfo.nextPage})" dataid="2">下一页&gt;</li>--%>
-                                        <%--</c:if>--%>
-                                        <%--<c:if test="${pageInfo.pageNum>1 and pageInfo.pageNum<6}">--%>
-
-                                                <%--<c:if test="${pageInfo.pageNum==ind}">--%>
-                                                    <%--<li class="search-page-act" onclick="pageAjax(${ind})">${ind}</li>--%>
-                                                <%--</c:if>--%>
-                                                <%--<c:if test="${pageInfo.pageNum!=ind}">--%>
-                                                    <%--<li  onclick="pageAjax(${ind})">${ind}</li>--%>
-                                                <%--</c:if>--%>
-
-                                            <%--<li pagen="morePage" class="search-page-more">...</li>--%>
-                                            <%--<li  onclick="pageAjax(${pageInfo.pages})">${pageInfo.pages}</li>--%>
-
-                                        <%--</c:if>--%>
-                                        <%--<ul id="biuuu_city_list"></ul>--%>
-                                            <ul id="demo20" class="search-page-num"></ul>
-
-
-
-
-                                    <%--</ul>--%>
-                                </ul>
                             </div>
                         </li>
+                        <c:choose>
+                            <c:when test="${pageInfo.total>0}">
+
+                                <c:forEach items="${pageInfo.list}" var="obj" varStatus="index">
+                                    <li>
+                                        <div class="search_img">
+                                            <a id="search_log_${obj.showImg}" href="${ctx}/show/detail/${obj.showId}" data-spm="ditem_0" target="_blank" title="${obj.showName}">
+                                                <img src="${ctx}/static/image/${obj.showImg}" alt="" width="115" height="155"/>
+                                            </a>
+                                        </div>
+                                        <div class="search_txt"><h3><a id="search_log_166939" href="${ctx}/show/detail/${obj.showId}" target="_blank">
+                                        <c:choose>
+                                            <c:when test="${fn:contains(obj.showName, showName) and showName!=''}">
+                                                ${fn:replace(obj.showName,showName,"<span class='c4'>".concat(showName).concat("</span>"))}
+
+                                            </c:when>
+                                            <c:otherwise>
+                                                ${obj.showName}
+                                            </c:otherwise>
+                                        </c:choose>
+                                        </a></h3>
+                                            <p class="search_txt_cut c3">${obj.showTitle}</p>
+                                            <p class="search_txt_time c3"><a href="javascript:void(0);" class="search_txt_time_icon"></a><fmt:formatDate value="${obj.showBeginTime}" pattern="yyyy.MM.dd"/>
+                                                -<fmt:formatDate value="${obj.showEndTime}" pattern="yyyy.MM.dd"/></p>
+                                            <p class="c1"><span class="c3 search_txt_site_icon">${obj.showPlace}</span></p>
+                                            <p class="search_txt_piao">
+                                                <c:choose>
+                                                    <c:when test="${obj.showMaxPrice == null || obj.showMaxPrice == ''}">
+                                                        <em>${obj.showMinPrice}元</em>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <em>${obj.showMinPrice}-${obj.showMaxPrice}元</em>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <c:if test="${obj.showStatus eq 1}">
+                                                    预订
+                                                </c:if>
+                                                <c:if test="${obj.showStatus eq 2}">
+                                                    预售
+                                                </c:if>
+                                                <c:if test="${obj.showStatus eq 3}">
+                                                    售票中
+                                                </c:if>
+                                            </p>
+                                        </div>
+                                    </li>
+
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="now">没有找到符合条件的商品。您可以减少筛选条件重新搜索。</li>
+                            </c:otherwise>
+                        </c:choose>
+
+
+                        <c:if test="${pageInfo.pages>1}">
+                            <li id="search_list_page_tj" class="search_list_page">
+                                <div class="search-page-box">
+                                    <ul class="search-page-list">
+                                        <ul class="search-page-num">
+
+                                            <c:choose>
+                                                <c:when test="${pageInfo.pageNum==1}">
+                                                    <li class="search-pagePrev gray" >&lt; 上一页</li>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <li class="search-pagePrev" onclick="pageAjax(${pageInfo.prePage})">&lt; 上一页</li>
+                                                </c:otherwise>
+                                            </c:choose>
+
+                                            <c:choose>
+                                                <c:when test="${pageInfo.pages<7}">
+
+                                                    <c:forEach var="ind" begin="1" end="${pageInfo.pages}" step="1">
+                                                        <li onclick="pageAjax(${ind})" <c:if test="${pageInfo.pageNum==ind}">class="search-page-act"</c:if>>${ind}</li>
+                                                    </c:forEach>
+
+                                                </c:when>
+                                                <c:when test="${pageInfo.pageNum<6 and pageInfo.pages>7}">
+
+                                                    <c:forEach var="ind" begin="1" end="6" step="1">
+                                                        <li onclick="pageAjax(${ind})" <c:if test="${pageInfo.pageNum==ind}">class="search-page-act"</c:if>>${ind}</li>
+                                                    </c:forEach>
+                                                    <li pagen="morePage" class="search-page-more">...</li>
+                                                    <li onclick="pageAjax(${pageInfo.pages})">${pageInfo.pages}</li>
+
+                                                </c:when>
+                                                <c:when test="${pageInfo.pageNum>5 and pageInfo.pages-pageInfo.pageNum>3}">
+                                                    <li onclick="pageAjax(1)">1</li>
+                                                    <li pagen="morePage" class="search-page-more">...</li>
+                                                    <c:forEach var="ind" begin="${pageInfo.pageNum-2}" end="${pageInfo.pageNum+2}" step="1">
+                                                        <li onclick="pageAjax(${ind})" <c:if test="${pageInfo.pageNum==ind}">class="search-page-act"</c:if>>${ind}</li>
+                                                    </c:forEach>
+                                                    <li pagen="morePage" class="search-page-more">...</li>
+                                                    <li onclick="pageAjax(${pageInfo.pages})">${pageInfo.pages}</li>
+                                                </c:when>
+                                                <c:when test="${pageInfo.pages-pageInfo.pageNum<4}">
+                                                    <li onclick="pageAjax(1)">1</li>
+                                                    <li pagen="morePage" class="search-page-more">...</li>
+                                                    <c:forEach var="ind" begin="${pageInfo.pages-4}" end="${pageInfo.pages}" step="1">
+                                                        <li onclick="pageAjax(${ind})" <c:if test="${pageInfo.pageNum==ind}">class="search-page-act"</c:if>>${ind}</li>
+                                                    </c:forEach>
+
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <li onclick="pageAjax(1)">1</li>
+                                                    <li pagen="morePage" class="search-page-more">...</li>
+                                                    <c:forEach var="ind" begin="${pageInfo.pageNum-2}" end="${pageInfo.pageNum+2}" step="1">
+                                                        <li onclick="pageAjax(${ind})" <c:if test="${pageInfo.pageNum==ind}">class="search-page-act"</c:if>>${ind}</li>
+                                                    </c:forEach>
+                                                    <li onclick="pageAjax(${pageInfo.pages})" <c:if test="${pageInfo.pageNum==pageInfo.pages}">class="search-page-act"</c:if> >${pageInfo.pages}</li>
+                                                </c:otherwise>
+                                            </c:choose>
+                                            <c:choose>
+                                                <c:when test="${pageInfo.pageNum==pageInfo.pages}">
+                                                    <li class="search-pageNext gray">下一页&gt;</li>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <li class="search-pageNext" onclick="pageAjax(${pageInfo.nextPage})">下一页&gt;</li>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </ul>
+
+                                    </ul>
+                                </div>
+                            </li>
+                        </c:if>
+
                     </ul>
                 </div>
             </div>
@@ -564,56 +642,7 @@
 <script type="text/javascript" src="${ctx}/static/js/classification/classifiction.js"></script>
 <script type="text/javascript" src="${ctx}/static/js/index.js"></script>
 <script src="${ctx}/static/layui/layui.all.js"  charset="utf-8"></script>
-<!--日期插件-->
-<script>
-    layui.use(['laypage', 'layer'], function(){
-        var laypage = layui.laypage
-            ,layer = layui.layer;
 
-        //自定义样式
-        laypage.render({
-            elem: 'demo2-1'
-            ,count: 1110
-            ,theme: '#ed0a75'
-            ,limit:60
-        });
-
-
-
-
-        //将一段数组分页展示
-
-        // 测试数据
-
-        //调用分页
-        laypage.render({
-            elem: 'demo20'
-            ,count:${pageInfo.total}
-            ,theme:'#ed0a75'
-            ,limit:60
-        });
-    });
-
-
-
-
-
-
-        layui.use('laydate', function(){
-        var laydate = layui.laydate;
-
-        //日期选择器
-        laydate.render({
-            elem: '#date1',
-            //,type: 'date' //默认，可不填
-        });
-        //日期选择器
-        laydate.render({
-            elem: '#date2',
-            //,type: 'date' //默认，可不填
-        });
-    });
-</script>
 
 <div class="server_info" style="display:none;color:#f3f3f3;text-align:center;">mec-guide-web011014068073.center.na62</div>
 
@@ -640,6 +669,5 @@
         <p>回到顶部</p>
     </div>
 </div>
-<iframe src="${ctx}/pages/blk.html" id="_oid_ifr_" style="width: 0px; height: 0px; display: none;"></iframe>
 </body>
 </html>

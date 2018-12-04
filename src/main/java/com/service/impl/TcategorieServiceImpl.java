@@ -22,4 +22,9 @@ public class TcategorieServiceImpl implements TcategorieService {
     public List<Tcategorie> queryAll(String areainfoId) {
         return tcategorieMapper.tcategorieList(areainfoId);
     }
+
+    @Override
+    public List<Tcategorie> queryByShowName(String showName) {
+        return tcategorieMapper.queryByShowName(showName);
+    }
 }

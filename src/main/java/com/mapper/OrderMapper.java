@@ -23,6 +23,20 @@ public interface OrderMapper {
     List<Order> queryOrderInfo(@Param("user_id") Integer user_id);
 
     /**
+     * 获取全部订单
+     *
+     * @return
+     */
+    List<Order> queryOrderAllInfo();
+
+    /**
+     * 查询指定订单
+     *
+     * @return
+     */
+    Order queryOrderIdInfo(@Param("id")Integer id);
+
+    /**
      * 根据用户ID查询用户优惠劵
      *
      * @return
@@ -81,4 +95,19 @@ public interface OrderMapper {
      * @return
      */
     int updateGoodsInfo(Tshow tshow);
+
+    /**
+     * 添加订单
+     * @return
+     */
+    int insertOrder(@Param("order") Order order);
+
+    /**
+     * 根据订单号修改订单状态
+     * @param number
+     * @return
+     */
+    int updateOrder(@Param("number") String number);
+
+    Order selectStatus(@Param("number") String number);
 }

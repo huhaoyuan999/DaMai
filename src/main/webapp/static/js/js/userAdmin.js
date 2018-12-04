@@ -148,18 +148,36 @@ function queryUserIdInfo(id) {
     }
 }
 
+// /**
+//  * 删除指定信息
+//  */
+// function deleteUserIdInfoHu(id, loginName) {
+//     alert(id);pppp
+//     alert(loginName);
+//     $("#notify-msg2").text("您确定要删除用户" + loginName + "吗？与此用户相关的信息也将被删除哦！");
+//     $("#userIDInfo").val(id);
+//     $("#notify-window2").show();
+// }
+
 /**
  * 删除指定信息
  */
-function deleteUserIdInfoHu(id, loginName) {
-    $("#notify-msg2").text("您确定要删除用户" + loginName + "吗？与此用户相关的信息也将被删除哦！");
-    $("#userIDInfo").val(id);
+$("body").on("click", ".deleteUserID", function () {
+    //获取用户登录名
+    var loginName = $(this).attr("lay-id");
+    //获取用户ID
+    var id = $(this).attr("id");
+    var result = id.split('delete');
+    var idInfo=result[result.length - 1];
+
+    $("#notify-msg2").text("您确定要删除用户"+loginName+"吗？与此用户相关的信息也将被删除哦！");
+    $("#userIDInfo").val(idInfo);
     $("#notify-window2").show();
-}
+})
+
 
 function deleteUserId() {
     var id = $("#userIDInfo").val();
-    alert(id);
     $("#notify-window2").hide();
     $.post("/damai/user/deleteUser/" + id + "", dataInfo)
 

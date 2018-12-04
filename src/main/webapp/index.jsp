@@ -38,7 +38,7 @@
 
 <div class="adverse" data-spm="ad"
      style="background-color: rgb(230, 60, 146); display: block; transition: none 0s ease 0s;">
-    <div class="close"></div>
+    <div class="close" onclick="closeAdverse()"></div>
     <a href="${ctx}/show/index"
        target="_blank" data-spm="dadvertise">
         <img src="${pageContext.request.contextPath }/static/image/TB1pUItiVzqK1RjSZFCSuvbxVXa.jpg">
@@ -191,7 +191,7 @@
 <%--<script data-config="{combine:true}" src="${pageContext.request.contextPath }/static/js/seed.js"></script>--%>
 <script src="${pageContext.request.contextPath }/static/js/index.js"></script>
 <script src="${pageContext.request.contextPath }/static/js/jquery-1.12.4.js"></script>
-<script src="${pageContext.request.contextPath }/static/js/js/head.js"></script>
+<script src="${pageContext.request.contextPath }/static/js/classification/head.js"></script>
 <script type="text/javascript">
     function bl() {
         $(".location-header").show()

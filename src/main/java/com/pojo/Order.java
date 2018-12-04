@@ -1,5 +1,7 @@
 package com.pojo;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -17,49 +19,19 @@ public class Order implements Serializable {
     private Double discount;//优惠价格(使用优惠券优惠了多少钱)
     private Integer status;//交易状态,0:交易关闭,1:待付款,2:已付款
 
-    //    private Integer user_id;//用户id(外键)
-    //  private Integer show_id;//演出id(外键)
+    private Integer userId;//用户id(外键)
+    private Long showId;//演出id(外键)
     private Long address_id;//收货地址id(外键)
 
     private User user;//用户集合
     private Tshow tshow;//商品集合
     private Taddress taddress;//地址集合
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createDate;//创建时间
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date deliveryDate;//发货时间
     private String address;//收货地址
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Tshow getTshow() {
-        return tshow;
-    }
-
-    public void setTshow(Tshow tshow) {
-        this.tshow = tshow;
-    }
-
-    public Taddress getTaddress() {
-        return taddress;
-    }
-
-    public void setTaddress(Taddress taddress) {
-        this.taddress = taddress;
-    }
 
     public Integer getId() {
         return id;
@@ -125,28 +97,36 @@ public class Order implements Serializable {
         this.status = status;
     }
 
-    //    public Integer getUser_id() {
-//        return user_id;
-//    }
-//
-//    public void setUser_id(Integer user_id) {
-//        this.user_id = user_id;
-//    }
-//
-//    public Integer getShow_id() {
-//        return show_id;
-//    }
-//
-//    public void setShow_id(Integer show_id) {
-//        this.show_id = show_id;
-//    }
-//
     public Long getAddress_id() {
         return address_id;
     }
 
     public void setAddress_id(Long address_id) {
         this.address_id = address_id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Tshow getTshow() {
+        return tshow;
+    }
+
+    public void setTshow(Tshow tshow) {
+        this.tshow = tshow;
+    }
+
+    public Taddress getTaddress() {
+        return taddress;
+    }
+
+    public void setTaddress(Taddress taddress) {
+        this.taddress = taddress;
     }
 
     public Date getCreateDate() {
@@ -163,5 +143,29 @@ public class Order implements Serializable {
 
     public void setDeliveryDate(Date deliveryDate) {
         this.deliveryDate = deliveryDate;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Long getShowId() {
+        return showId;
+    }
+
+    public void setShowId(Long showId) {
+        this.showId = showId;
     }
 }

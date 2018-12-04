@@ -4,7 +4,10 @@ import com.github.pagehelper.PageInfo;
 import com.pojo.TicketHolder;
 import com.pojo.User;
 import com.service.UserService;
+import com.utils.HttpUtils;
+import com.utils.ReturnResult;
 import com.utils.SecurityUtils;
+import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -15,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.List;
+import java.util.*;
 
 /**
  * 用户控制类
@@ -85,6 +88,18 @@ public class UserController {
             session.invalidate();
             return "redirect:/jsp/user/login.jsp";
         }
+    }
+
+    /**
+     * 退出登录
+     * @param
+     * @param session
+     * @return
+     */
+    @RequestMapping("/exit")
+    public String exit(@RequestParam(value = "url", required = false) String url, HttpSession session) {
+        session.invalidate();
+        return "redirect:"+ url;
     }
 
     /**
@@ -159,11 +174,19 @@ public class UserController {
     @RequestMapping("/updatePwd")
     @ResponseBody
     public int updatePassword(@RequestBody User user) {
-        User user5 = new User();
-        user5.setId(user.getId());
-        user5.setPassword(SecurityUtils.md5Hex(user.getPassword()));
-        return userService.updateInfo(user5);
+        User user1 = userService.queryUserList(user.getLoginName());
+        if(user1.getPassword().trim()!=null&&user1.getPassword().trim()!=""){
+            User user5 = new User();
+            user5.setId(user.getId());
+            user5.setPassword(SecurityUtils.md5Hex(user.getPassword()));
+            return userService.updateInfo(user5);
+        }else {
+            return 0;
+        }
+
     }
+
+
 
     /**
      * 更换账号
@@ -315,6 +338,17 @@ public class UserController {
         return userService.queryUserInfo(id);
     }
 
+
+    @RequestMapping("/queryUserId")
+    @ResponseBody
+    public User queryUserId(@RequestParam("id") String id,HttpSession session) {
+        User user=userService.queryUserList(id);
+        if(user!=null){
+            session.setAttribute("user",user);
+        }
+        return user;
+    }
+
     /**
      * 修改指定用户
      *
@@ -334,10 +368,88 @@ public class UserController {
     @RequestMapping("/deleteUser/{id}")
     @ResponseBody
     public int deleteUserInfo(@PathVariable("id") Integer id) {
-        System.out.println("进来了");
-        int num = userService.deleteUserInfo(id);
-        System.out.println("得到了：" + num);
-        return num;
+        return userService.deleteUserInfo(id);
     }
+
+    /**
+     * 短信验证码
+     * @param
+     */
+    @RequestMapping("chuangxinsms")
+    @ResponseBody
+    public int chuangxinsms (@RequestParam("phoneNo")String phoneNo){
+        String host = "https://cxkjsms.market.alicloudapi.com";
+        String path = "/chuangxinsms/dxjk";
+        String method = "POST";
+        String appcode = "b2e3145f6c904eec92d82439849c2c85";
+        Map<String, String> headers = new HashMap<String, String>();
+        //最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
+        headers.put("Authorization", "APPCODE " + appcode);
+        Map<String, String> querys = new HashMap<String, String>();
+
+        int i = (int) ((Math.random() * 9 + 1) * 100000);
+        querys.put("content", "【大麦】你的验证码是："+i+"，3分钟内有效！");
+        querys.put("mobile", phoneNo);
+        Map<String, String> bodys = new HashMap<String, String>();
+
+
+        try {
+            /**
+             * 重要提示如下:
+             * HttpUtils请从
+             * https://github.com/aliyun/api-gateway-demo-sign-java/blob/master/src/main/java/com/aliyun/api/gateway/demo/util/HttpUtils.java
+             * 下载
+             *
+             * 相应的依赖请参照
+             * https://github.com/aliyun/api-gateway-demo-sign-java/blob/master/pom.xml
+             */
+            HttpResponse response = HttpUtils.doPost(host, path, method, headers, querys, bodys);
+            System.out.println(response.toString());
+            return i;
+            //获取response的body
+            //System.out.println(EntityUtils.toString(response.getEntity()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+
+    /**
+     * 验证码注册
+     * @param phone
+     * @param model
+     * @return
+     */
+    @RequestMapping("bookRegister")
+    public String bookRegister(@RequestParam("phone") String phone,Model model){
+        model.addAttribute("phone",phone);
+        return "goods/booRegister";
+    }
+
+    /**
+     * 验证码注册账号
+     * @param phone
+     * @param session
+     * @return
+     */
+    @RequestMapping("insertBookUser")
+    @ResponseBody
+    public String insertBookUser(@RequestParam("phone") String phone,HttpSession session){
+        User user=new User();
+        user.setLoginName(phone);
+        user.setPassword(" ");
+        user.setUserName(phone);
+        user.setLoginPhone(Long.valueOf(phone));
+        int insertInfo = userService.insertUser(user);
+        if(insertInfo>0){
+            session.setAttribute("user",userService.queryUserList(phone));
+            return "true";
+        }
+        return "false";
+    }
+
+
+
 
 }

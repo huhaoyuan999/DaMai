@@ -21,6 +21,43 @@ public class User implements Serializable {
     private String loginName;//手机或电子邮箱(用户登入名)
     private Integer type;//用户类型
     private String imageName;//图片文件名
+    private Long loginPhone;//手机登录
+    private Double balance;//余额
+    private Integer integral;//积分
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date latelyLogin;//最近一次登录时间
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+
+    public Integer getIntegral() {
+        return integral;
+    }
+
+    public void setIntegral(Integer integral) {
+        this.integral = integral;
+    }
+
+    public Date getLatelyLogin() {
+        return latelyLogin;
+    }
+
+    public void setLatelyLogin(Date latelyLogin) {
+        this.latelyLogin = latelyLogin;
+    }
+
+    public Long getLoginPhone() {
+        return loginPhone;
+    }
+
+    public void setLoginPhone(Long loginPhone) {
+        this.loginPhone = loginPhone;
+    }
 
     public User() {
     }

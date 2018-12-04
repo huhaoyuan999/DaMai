@@ -15,6 +15,7 @@
           <result column="show_status" jdbcType="BIGINT" property="showStatus" />
           <result column="show_begin_time" jdbcType="TIMESTAMP" property="showBeginTime" />
           <result column="show_end_time" jdbcType="TIMESTAMP" property="showEndTime" />
+          <result column="show_ipt_num" jdbcType="INTEGER" property="showIptNum"/>
           <association property="tareainfo" column="areainfo_id" javaType="com.pojo.Tareainfo" select="com.mapper.TareainfoMapper.selectByPrimaryKey"/>
           <association property="tcategorie" column="categorie_id" javaType="com.pojo.Tcategorie" select="com.mapper.TcategorieMapper.selectById" />
       </resultMap>
@@ -52,6 +53,9 @@
             </if>
             <if test="tshow.showBeginTime!=null">
                 and  #{tshow.showBeginTime} between show_begin_time and show_end_time
+            </if>
+            <if test="tshow.showName!=null">
+                and  `show_name` LIKE '%${tshow.showName}%'
             </if>
         </where>
          order by ${pai} desc

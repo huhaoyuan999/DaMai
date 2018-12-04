@@ -43,13 +43,29 @@ public class OrderController {
     @RequestMapping("/query/{user_id}/{info}")
     public String queryOrderInfo(@PathVariable("user_id") Integer user_id, @PathVariable("info") Integer info, Model model) {
         List<Order> orderList = orderService.queryOrderInfo(user_id);
+        PageInfo<Order> orderAllList = orderService.queryOrderAllInfo(1, 5);
         model.addAttribute("orderList", orderList);
         if (info == 0) {
+            model.addAttribute("orderAllList", orderAllList);
             return "user/order";
         } else {
-            model.addAttribute("info", info);
+            Order order = orderService.queryOrderIdInfo(info);
+            model.addAttribute("order", order);
             return "user/orderDetailed";
         }
+    }
+
+    /**
+     * 分页查询订单信息
+     *
+     * @return
+     */
+    @RequestMapping("/queryPage/{pageNo}")
+    public String queryOrderPageInfo(@PathVariable("pageNo") Integer pageNo, Model model) {
+        System.out.println("到了到了");
+        PageInfo<Order> orderAllList = orderService.queryOrderAllInfo(pageNo, 5);
+        model.addAttribute("orderAllList", orderAllList);
+        return "user/order";
     }
 
     /**
@@ -120,6 +136,7 @@ public class OrderController {
      * @return
      */
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
+    @ResponseBody
     public String uploadFileHandler(@RequestParam("file") MultipartFile file, Model model) {
         if (!file.isEmpty()) {
             try {
@@ -133,8 +150,8 @@ public class OrderController {
                 file.transferTo(serverFile);
                 model.addAttribute("imageFile2", file.getOriginalFilename());
 
-                //System.out.println("得到的图片文件名是：" + file.getOriginalFilename());
-                return "admin/changeGoods";
+                System.out.println("得到的图片文件名是：" + file.getOriginalFilename());
+                return "true";
             } catch (Exception e) {
                 return "You failed to upload " + file.getOriginalFilename() + " => " + e.getMessage();
             }

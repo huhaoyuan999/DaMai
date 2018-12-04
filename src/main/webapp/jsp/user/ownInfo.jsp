@@ -1,5 +1,6 @@
 <%--个人信息查看与修改页面--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html xmlns="http://www.w3.org/1999/xhtml" class="ks-webkit537 ks-webkit ks-chrome70 ks-chrome"
       data-spm-anchor-id="0.0.0.i0.423cd01fbObbxD">
@@ -45,6 +46,12 @@
                 <dt>交易中心</dt>
                 <dd><a id="nav_Order" href="${ctx}/order/query/${user.id}/0" title="订单管理"
                        domain=""><span>订单管理</span></a></dd>
+
+
+                <dd><a href="${ctx}/jsp/admin/accountManage.jsp" title="账户管理"
+                       domain=""><span>账户管理</span></a></dd>
+                <dl>
+
 
                 <dd><a id="nav_myCoupon" href="${ctx}/order/reduce/${user.id}" title="我的优惠券"
                        domain=""><span>我的优惠券</span></a></dd>
@@ -404,8 +411,18 @@
                         </li>
                     </ul>
                 </div>
-                <div class="info-safety">
-                </div>
+                <c:if test="${user.loginPhone!=null}">
+                    <div class="info-safety">
+                        <ul>
+                            <li class="suc-title">手机验证</li>
+                            <li class="infos-con"><span>您验证的手机：${fn:replace(user.loginPhone,fn:substring(user.loginPhone,2 ,8 ) ,'****' )}</span></li>
+                            <li class="right">
+                                <a href="https://passport.damai.cn/account/resetmobile" class="c7">更换</a>&nbsp;&nbsp;
+                            </li>
+                        </ul>
+                    </div>
+                </c:if>
+
             </div>
 
         </div>

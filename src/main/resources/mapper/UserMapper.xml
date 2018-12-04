@@ -17,7 +17,8 @@
         INSERT INTO `t_user`
         <trim prefix="(" suffix=")" suffixOverrides=",">
             `nickname`,`password`,`sex`,`loginName`,`type`,
-            <if test="userName != null and userName!=''">`userName`</if>
+            <if test="userName != null and userName!=''">`userName`,</if>
+            <if test="loginPhone!=null and loginPhone!=''">`login_phone`</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <choose>
@@ -28,7 +29,7 @@
                     '麦子',
                 </otherwise>
             </choose>
-            <if test="password != null and password!=''">#{password},</if>
+            <if test="password != null">#{password},</if>
             <choose>
                 <when test="sex != null">
                     #{sex},
@@ -47,6 +48,7 @@
                 </otherwise>
             </choose>
             <if test="userName != null and userName!=''">#{userName},</if>
+            <if test="loginPhone!=null and loginPhone!=''">#{loginPhone}</if>
         </trim>
     </insert>
 
@@ -105,6 +107,10 @@
     <!--获取用户列表-->
     <select id="queryUserAllInfo" resultType="com.pojo.User">
         SELECT * FROM t_user ORDER BY `type` DESC
+    </select>
+
+    <select id="queryUser" resultType="com.pojo.User">
+         SELECT * FROM t_user where loginName=#{id}
     </select>
 
     <!--删除指定用户信息-->

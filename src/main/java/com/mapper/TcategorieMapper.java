@@ -18,4 +18,6 @@ public interface TcategorieMapper {
     List<Tcategorie> tcategorieList(@Param("areainfoId") String areainfoId);
 
      Tcategorie selectById(@Param("categorieId") Long categorieId);
+
+    List<Tcategorie> queryByShowName(@Param("showName") String showName);
 }

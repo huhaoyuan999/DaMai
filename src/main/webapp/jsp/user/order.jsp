@@ -7,6 +7,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>我的大麦-个人信息</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/public-min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/ui-min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/index3.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/saved_resource(1).css">
@@ -43,10 +44,14 @@
         <div class="coupon_title">我的大麦</div>
         <div class="coupon_menu">
 
-            <h2 class="coupon_menu_title">用户中心</h2>
+            <h2 class="coupon_menu_title">交易中心</h2>
             <ul class="coupon_menu_item">
 
                 <li><a href="${ctx}/order/query/${user.id}/0">订单管理</a></li>
+
+
+                    <li><a href="${ctx}/jsp/admin/accountManage.jsp">账户管理</a></li>
+
 
                 <li><a href="${ctx}/order/reduce/${user.id}">我的优惠劵</a></li>
             </ul>
@@ -93,7 +98,7 @@
         <hr>
         <div id="container">
             <div class="order-list">
-                <c:if test="${empty orderList}">
+                <c:if test="${empty orderList && user.type==0}">
                     <div class="next-row order-errors" data-spm-anchor-id="a2oeg.orderlist.0.i0.6edc73yo73yoTJ"
                          style="display: flex;">
                         <div class="next-col error-image"><img
@@ -103,7 +108,7 @@
                         </div>
                     </div>
                 </c:if>
-                <c:if test="${!empty orderList}">
+                <c:if test="${!empty orderList && user.type==0}">
                     <div class="order-list-wrapper" data-spm="list" style="display: block;">
                         <div class="next-row order-list-header">
                             <div class="next-col project-name" style="width: 390px;">项目名称</div>
@@ -124,10 +129,13 @@
                                                 <div class="next-row project-name-wrapper" data-spm="list">
                                                     <div class="next-col next-col-4 project-name-img"
                                                          data-spm="ditem_0">
-                                                        <img
-                                                                src="${ctx}/static/images/${order.tshow.showImg}"></div>
+                                                        <a href="${ctx}/order/query/${user.id}/${order.id}"><img
+                                                                src="${ctx}/static/image/${order.tshow.showImg}"/></a>
+                                                    </div>
                                                     <div class="next-col project-name-content" data-spm="ditem_0">
-                                                        <div class="next-row project-name">${order.tshow.showName}</div>
+                                                        <div class="next-row project-name"><a
+                                                                href="${ctx}/order/query/${user.id}/${order.id}">${order.tshow.showName}</a>
+                                                        </div>
                                                         <div class="next-row project-name-perform">
                                                             演出场次：<fmt:formatDate value="${order.tshow.showBeginTime}"
                                                                                  pattern="yyyy-MM-dd hh:mm"/>
@@ -139,7 +147,7 @@
                                                 </div>
                                             </div>
                                             <div class="next-col ticket-number" style="width: 144px;">
-                                                <div class="next-row ticket-number-wrapper">1</div>
+                                                <div class="next-row ticket-number-wrapper">${order.num}</div>
                                             </div>
                                             <div class="next-col order-amount" style="width: 130px;">
                                                 <div class="next-col order-amount-wrapper">
@@ -197,6 +205,103 @@
                                         class="next-btn next-btn-normal next-btn-medium next-pagination-item next">下一页<i
                                         class="next-icon next-icon-arrow-right next-icon-medium next-icon-last"></i>
                                 </button>
+                            </div>
+                        </div>
+                    </div>
+                </c:if>
+                <c:if test="${!empty orderAllList && user.type==1}">
+                    <div class="order-list-wrapper" data-spm="list" style="display: block;">
+                        <div class="next-row order-list-header">
+                            <div class="next-col project-name" style="width: 390px;">项目名称</div>
+                            <div class="next-col ticket-number" style="width: 144px;">票品张数</div>
+                            <div class="next-col order-amount" style="width: 130px;">订单金额</div>
+                            <div class="next-col transaction-status" style="width: 130px;">交易状态</div>
+                            <div class="next-col transaction-operation" style="width: 210px;">交易操作</div>
+                        </div>
+                        <div class="next-loading order-list-container"
+                             data-spm-anchor-id="a2oeg.orderlist.list.i0.6edcIYemIYem8Z">
+
+                            <c:forEach items="${orderAllList.list}" var="order" varStatus="indexs">
+                                <div class="next-loading-component" id="deleteOrder${order.id}">
+                                    <div class="next-col order-list-item" data-spm="item_0">
+                                        <div class="next-row order-list-item-header">订单号：${order.number}</div>
+                                        <div class="next-row order-list-item-bottom">
+                                            <div class="next-col project-name" style="width: 390px;">
+                                                <div class="next-row project-name-wrapper" data-spm="list">
+                                                    <div class="next-col next-col-4 project-name-img"
+                                                         data-spm="ditem_0">
+                                                        <a href="${ctx}/order/query/${user.id}/${order.id}"><img
+                                                                src="${ctx}/static/image/${order.tshow.showImg}"></a>
+                                                    </div>
+                                                    <div class="next-col project-name-content" data-spm="ditem_0">
+                                                        <div class="next-row project-name"><a
+                                                                href="${ctx}/order/query/${user.id}/${order.id}">${order.tshow.showName}</a>
+                                                        </div>
+                                                        <div class="next-row project-name-perform">
+                                                            演出场次：<fmt:formatDate value="${order.tshow.showBeginTime}"
+                                                                                 pattern="yyyy.MM.dd"/>-
+                                                            <fmt:formatDate value="${order.tshow.showEndTime}"
+                                                                            pattern="yyyy.MM.dd"/>
+                                                        </div>
+                                                        <div class="next-row project-name-venue">
+                                                            演出场馆：${order.tshow.showPlace}</div>
+                                                        <div class="next-row pick-type-icon undefined"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="next-col ticket-number" style="width: 144px;">
+                                                <div class="next-row ticket-number-wrapper">${order.num}</div>
+                                            </div>
+                                            <div class="next-col order-amount" style="width: 130px;">
+                                                <div class="next-col order-amount-wrapper">
+                                                    <div class="next-row order-amount-content">
+                                                        ￥${order.num*order.price+order.transport-order.discount}</div>
+                                                    <div class="next-row transportation-costs">(含运费￥${order.transport})
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="next-col transaction-status" style="width: 130px;">
+                                                <div class="next-col transaction-status-wrapper">
+                                                    <div class="next-row transaction-status-content">
+                                                        <c:if test="${order.status==0}">交易关闭</c:if>
+                                                        <c:if test="${order.status==1}">待付款</c:if>
+                                                        <c:if test="${order.status==2}">已付款</c:if>
+                                                    </div>
+                                                    <div class="next-row" data-spm="list"><a data-spm="ddetail_0"
+                                                                                             href="${ctx}/order/query/${user.id}/${order.id}">订单详情</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="next-col transaction-operation" style="width: 210px;">
+                                                <div class="next-col transaction-operation-wrapper">
+                                                    <div class="text-wrapper">
+                                                        <div class="next-row pick-seat-info" data-exp="true"
+                                                             within24="false"
+                                                             ic_id="167164" usercode="117640320" data-spm="dnotice"
+                                                             data-spm-anchor-id="a2oeg.orderlist.item_0.dnotice.6edcIYemIYem8Z">
+                                                            &nbsp;&nbsp;<br/><input type="hidden" id="orderId2"/>
+                                                            <a href="javaScript:void(0)" style="color: #2f97b4;"
+                                                               onclick="showInfo(${order.id})">删除</a><br/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                            <div id="detailPagination" class="pagination" data-spm-anchor-id="0.0.0.i0.61b87732sriivv">
+                                <div id="footer">
+                                    <a href="javascript:void(0)" onclick="orderPage(${orderAllList.firstPage})"
+                                       style="border-radius: 4px;">首页</a>
+                                    <a href="javascript:void(0)" onclick="orderPage(${orderAllList.prePage})"
+                                       style="border-radius: 4px;">上一页</a>
+                                    <a href="javascript:void(0)" onclick="orderPage(${orderAllList.nextPage})"
+                                       style="border-radius: 4px;">下一页</a>
+                                    <a href="javascript:void(0)" onclick="orderPage(${orderAllList.lastPage})"
+                                       style="border-radius: 4px;">末页</a>
+                                    <span>&nbsp;&nbsp;&nbsp;&nbsp;第${orderAllList.pageNum}页/共${orderAllList.pages}页    (共${orderAllList.total}条订单记录)</span>
+                                </div>
                             </div>
                         </div>
                     </div>

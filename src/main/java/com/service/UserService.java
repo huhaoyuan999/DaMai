@@ -3,6 +3,7 @@ package com.service;
 import com.github.pagehelper.PageInfo;
 import com.pojo.TicketHolder;
 import com.pojo.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -25,6 +26,13 @@ public interface UserService {
      * @return
      */
     int insertInfo(User user);
+
+    /**
+     * 用户注册
+     * @param user
+     * @return
+     */
+    public int insertUser(User user);
 
     /**
      * 修改用户信息
@@ -109,4 +117,11 @@ public interface UserService {
      * @return
      */
     int deleteUserInfo(Integer id);
+
+    /**
+     * 根据账号查询
+     * @param id
+     * @return
+     */
+    User queryUserList( String id);
 }
